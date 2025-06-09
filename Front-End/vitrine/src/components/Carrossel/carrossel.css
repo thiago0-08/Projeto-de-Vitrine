@@ -1,5 +1,3 @@
-/* carrossel.css */
-
 .carousel {
   display: flex;
   justify-content: center;
@@ -35,7 +33,7 @@
   right: 10px;
 }
 
-/* 🔽 Ocultar carrossel em telas menores que 768px */
+
 @media (max-width: 768px) {
   .carousel {
     display: none;
