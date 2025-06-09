@@ -1,0 +1,43 @@
+/* carrossel.css */
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+/* 🔽 Ocultar carrossel em telas menores que 768px */
+@media (max-width: 768px) {
+  .carousel {
+    display: none;
+  }
+}
