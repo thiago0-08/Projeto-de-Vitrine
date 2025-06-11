@@ -1,0 +1,148 @@
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: rgb(0, 129, 11);
+  --text-color: #333;
+  --text-light: #666;
+  --border-color: #e0e0e0;
+  --bg-color: #f9fafb;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+
+.produto-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-color);
+  min-height: calc(100vh - 80px); /* Ajuste para a altura da navbar */
+}
+
+.produto-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  max-width: 1200px;
+  width: 100%;
+border: #333 solid 1px;
+
+}
+
+.produto-image-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.produto-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+
+
+.produto-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.produto-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.produto-descricao {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin: 0.5rem 0;
+}
+
+.produto-preco-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.produto-preco {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.produto-botao {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.produto-botao:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  color: white;
+}
+
+.produto-not-found {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+/* Media Queries para Responsividade */
+@media (min-width: 768px) {
+  .produto-card {
+    flex-direction: row;
+  }
+  
+  .produto-image-container {
+    width: 50%;
+    height: auto;
+    min-height: 400px;
+  }
+  
+  .produto-info {
+    width: 50%;
+    padding: 2rem;
+    justify-content: center;
+  }
+  
+  .produto-preco-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .produto-botao {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .produto-info {
+    padding: 3rem;
+  }
+  
+  .produto-title {
+    font-size: 2.2rem;
+  }
+}
