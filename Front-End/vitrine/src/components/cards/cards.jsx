@@ -32,13 +32,13 @@ const Cards = () => {
       preco: 'R$ 299,99',
       imageUrl: 'https://acdn-us.mitiendanube.com/stores/002/201/888/products/c487062a1-f7992a55c2e0edc24016600730665442-1024-1024.jpg'
     },
-     {
+    {
       title: 'Card 4',
       description: 'Mais um produto.',
       preco: 'R$ 299,99',
       imageUrl: 'https://acdn-us.mitiendanube.com/stores/002/201/888/products/c487062a1-f7992a55c2e0edc24016600730665442-1024-1024.jpg'
     },
-     {
+    {
       title: 'Card 4',
       description: 'Mais um produto.',
       preco: 'R$ 299,99',

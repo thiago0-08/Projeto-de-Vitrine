@@ -6,26 +6,51 @@ export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav>
-      <Link to="/" className="title">
-        Website
-      </Link>
-      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
+    <nav className="navbar">
+      <div className="nav-container">
+        <Link to="/" className="logo">
+          <span className="logo-text">T10 Premium</span>
+        </Link>
+
+        <div
+          className={`hamburger ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+
+        <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
+          <li className="nav-item">
+            <NavLink
+              to="/about"
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              Sobre Nós
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to="/products"
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              Produtos
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to="/contact"
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              Contato
+            </NavLink>
+          </li>
+        </ul>
       </div>
-      <ul className={menuOpen ? "open" : ""}>
-        <li>
-          <NavLink to="/about">About</NavLink>
-        </li>
-        <li>
-          <NavLink to="/services">Services</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact">Contact</NavLink>
-        </li>
-      </ul>
     </nav>
   );
 };

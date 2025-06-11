@@ -1,15 +1,19 @@
 import Carrossel from './components/Carrossel/carrossel';
 import Cards from './components/cards/cards';
+import Rodape from './components/rodape/rodape';
 
 const Home = () => {
   return (
     <div>
-      <h1>Home Page</h1>
+      
       <Carrossel />
 
-     <Cards />
+       <Cards />
+
+      <Rodape />
       
-    </div>  
+    </div> 
+     
   );
 };
 
