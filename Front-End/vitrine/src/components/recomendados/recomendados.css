@@ -1,0 +1,28 @@
+.recomendados {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: #000000 1px solid;
+}
+.recomendados-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000000;
+}
+.recomendados-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .recomendados {
+    display: none;
+  }
+}
