@@ -1,9 +1,29 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
+import Rodape from "../rodape/rodape";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+ const scrollToFooter = () => {
+  if (window.location.pathname === "/") {
+    const footer = document.getElementById("rodape");
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" });
+    }
+  }else {
+    Navigate("/");
+    setTimeout(() => {
+      const footer = document.getElementById("rodape");
+      if (footer) {
+        footer.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+ }
+ setMenuOpen(false);
+};
+
 
   return (
     <nav className="navbar">
@@ -31,6 +51,7 @@ export const Navbar = () => {
               Sobre Nós
             </NavLink>
           </li>
+          
           <li className="nav-item">
             <NavLink
               to="/products"
@@ -40,11 +61,14 @@ export const Navbar = () => {
               Produtos
             </NavLink>
           </li>
+
+
           <li className="nav-item">
             <NavLink
-              to="/contact"
+              
               className="nav-link"
-              onClick={() => setMenuOpen(false)}
+              onClick={scrollToFooter}
+              style={{ background: "none", border: "none", cursor: "pointer" }}
             >
               Contato
             </NavLink>
