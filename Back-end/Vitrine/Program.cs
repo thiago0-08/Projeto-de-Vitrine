@@ -21,8 +21,9 @@ namespace Vitrine
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<VitrineDbContext>(options =>
-                options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.Parse("8.0.30-mysql"))
-            );
+                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+             );
+
 
             var app = builder.Build();
 
