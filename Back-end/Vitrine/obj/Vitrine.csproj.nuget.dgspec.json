@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app bootcamp\\Back-end\\Vitrine\\Vitrine.csproj": {}
+    "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app-bootcamp\\Back-end\\Vitrine\\Vitrine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app bootcamp\\Back-end\\Vitrine\\Vitrine.csproj": {
+    "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app-bootcamp\\Back-end\\Vitrine\\Vitrine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app bootcamp\\Back-end\\Vitrine\\Vitrine.csproj",
+        "projectUniqueName": "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app-bootcamp\\Back-end\\Vitrine\\Vitrine.csproj",
         "projectName": "Vitrine",
-        "projectPath": "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app bootcamp\\Back-end\\Vitrine\\Vitrine.csproj",
+        "projectPath": "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app-bootcamp\\Back-end\\Vitrine\\Vitrine.csproj",
         "packagesPath": "C:\\Users\\Gamer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app bootcamp\\Back-end\\Vitrine\\obj\\",
+        "outputPath": "C:\\Users\\Gamer\\OneDrive\\Área de Trabalho\\sites thiago\\app-bootcamp\\Back-end\\Vitrine\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
