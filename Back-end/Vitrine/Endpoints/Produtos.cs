@@ -50,7 +50,7 @@ namespace Vitrine.Endpoints
 
             rotaProdutos.MapPost("/", (VitrineDbContext contexto, ProdutoDTO produto) =>
             {
-                // Buscar a categoria com base no produto.IdCategoria
+                // Buscar a categoria .IdCategoria
                 Categoria categoria = contexto.Categorias.Find(produto.IdCategoria);
 
                 // Verificar se a categoria existe
@@ -68,7 +68,7 @@ namespace Vitrine.Endpoints
                     Tamanhos = produto.Tamanhos,
                     Cores = produto.Cores,
                     Imagem = produto.Imagem,
-                    Categoria = categoria // atribuindo a categoria ao produto
+                    Categoria = categoria 
                 };
 
                 contexto.Produtos.Add(novoProduto);
@@ -87,15 +87,21 @@ namespace Vitrine.Endpoints
                     return Results.NotFound();
                 }
 
-                // Atualize as propriedades do produto existente
+                // Atualiza o produto 
                 produtoExistente.Nome = produtoAtualizado.Nome;
                 produtoExistente.Descricao = produtoAtualizado.Descricao;
-                // Atualize outras propriedades conforme necessário
+                
 
                 contexto.SaveChanges();
 
                 return Results.NoContent();
             });
+
+            //rotaProdutos.MapGet("/itens", (VitrineDbContext contexto) =>
+            //{
+            //    var produtos = contexto.Produtos.ToList();
+            //    return TypedResults.Ok(produtos);
+            //});
 
             rotaProdutos.MapDelete("/{Id}", (VitrineDbContext contexto, int Id) =>
             {
