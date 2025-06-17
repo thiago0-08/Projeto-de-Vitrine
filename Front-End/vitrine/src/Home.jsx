@@ -6,15 +6,12 @@ import Recomendados from './components/recomendados/recomendados';
 const Home = () => {
   return (
     <div>
-      
+
       <Carrossel />
       <Recomendados />
-       <Cards />
+      <Cards />
+    </div>
 
-      <Rodape />
-      
-    </div> 
-     
   );
 };
 
