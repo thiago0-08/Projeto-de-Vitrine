@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Vitrine.props" />
-</Project>
