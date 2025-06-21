@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
-export const ProdutosContext = createContext();
+export const Api = createContext();
 
 export const ProdutosProvider = ({ children }) => {
   const [produtos, setProdutos] = useState(null); // usa null pra diferenciar carregando
@@ -40,8 +40,8 @@ export const ProdutosProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProdutosContext.Provider value={{ produtos, categoria }}>
+    <Api.Provider value={{ produtos, categoria }}>
       {children}
-    </ProdutosContext.Provider>
+    </Api.Provider>
   );
 };

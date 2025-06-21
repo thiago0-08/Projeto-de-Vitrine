@@ -1,7 +1,7 @@
 import './cards.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
-import { ProdutosContext } from '../../Context/produtoContext';
+import { Api } from '../../Api/api';
 
 const Cards = () => {
 
@@ -12,7 +12,7 @@ const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 12;
 
-  const { produtos } = useContext(ProdutosContext);
+  const { produtos } = useContext(Api);
   console.log('Produtos no Cards:', produtos);
   const cardsData = produtos?.products || [];
 

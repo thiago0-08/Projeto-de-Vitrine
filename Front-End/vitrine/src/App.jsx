@@ -1,6 +1,6 @@
 import Navbar from "./components/NavBar/navbar";
 import Home from "./Home";
-import { ProdutosProvider } from './Context/produtoContext';
+import { ProdutosProvider } from './Api/api';
 import Rodape from "./components/rodape/rodape";
 import Produto from './components/produtos/Produto';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
