@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vitrine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f230e41d2f23b4c8b37a3916d1a5ab8a92002e7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f058707ac437d5ee3fb658e70c55d598962adbf")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vitrine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vitrine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

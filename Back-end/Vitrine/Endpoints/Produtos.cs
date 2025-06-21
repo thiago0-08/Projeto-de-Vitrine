@@ -97,11 +97,7 @@ namespace Vitrine.Endpoints
                 return Results.NoContent();
             });
 
-            //rotaProdutos.MapGet("/itens", (VitrineDbContext contexto) =>
-            //{
-            //    var produtos = contexto.Produtos.ToList();
-            //    return TypedResults.Ok(produtos);
-            //});
+            
 
             rotaProdutos.MapDelete("/{Id}", (VitrineDbContext contexto, int Id) =>
             {
