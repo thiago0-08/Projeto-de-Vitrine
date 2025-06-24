@@ -12,17 +12,20 @@ const Produto = () => {
       <div className="produto-card">
         <div className="produto-image-container">
           <img 
-            src={produto.imageUrl} 
+            src={produto.imagem} 
             alt={produto.title} 
             className="produto-image"
             loading="lazy"
           />
         </div>
         <div className="produto-info">
-          <h1 className="produto-title">{produto.title}</h1>
-          <p className="produto-descricao">{produto.description}</p>
+          <h1 className="produto-title">{produto.nome}</h1>
+          <p className="produto-descricao">
+            Descrição:  {produto.descricao}</p>
+            <p className='produto-tamanho'> tamanho: {produto.tamanhos} </p>
+            <p className='produto-cor'>Cor: {produto.cores} </p>
           <div className="produto-preco-container">
-            <span className="produto-preco">{produto.preco}</span>
+            <span className="produto-preco"> Valor R$ {produto.preco}</span>
             <button className="produto-botao">Adicionar ao Carrinho</button>
           </div>
         </div>
