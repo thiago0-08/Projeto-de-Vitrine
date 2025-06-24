@@ -1,4 +1,5 @@
 ﻿using Database;
+using Microsoft.EntityFrameworkCore;
 using Vitrine.DTO;
 using Vitrine.Model;
 
@@ -10,26 +11,35 @@ namespace Vitrine.Endpoints
         {
             RouteGroupBuilder rotaProdutos = rotas.MapGroup("/produtos");
 
-            // Define a rota para produtos por categoria
+           
             RouteGroupBuilder rotaProdutosPorCategoria = rotas.MapGroup("/produtosPorCategoria");
 
-            rotaProdutos.MapGet("/", (VitrineDbContext contexto, string? nome, int pagina = 1, int tamanhoPagina = 10) =>
+            rotaProdutos.MapGet("/", async (VitrineDbContext contexto, string? nome, int pagina = 1, int tamanhoPagina = 10) =>
             {
-                IQueryable<Produto> produtosFiltrados = contexto.Produtos;
+                IQueryable<Produto> produtosQuery = contexto.Produtos.AsQueryable();
 
                 if (!string.IsNullOrEmpty(nome))
                 {
-                    produtosFiltrados = produtosFiltrados.Where(p => p.Nome.Contains(nome, StringComparison.OrdinalIgnoreCase));
+                    //case-insensitive no PostgreSQL 
+                    produtosQuery = produtosQuery.Where(p => EF.Functions.ILike(p.Nome, $"%{nome}%"));
                 }
 
-                var totalProdutos = produtosFiltrados.Count();
-                var produtosPaginados = produtosFiltrados.Skip((pagina - 1) * tamanhoPagina).Take(tamanhoPagina).ToList();
+               
+                var totalProdutos = await produtosQuery.CountAsync();
+
+               
+                var produtosPaginados = await produtosQuery
+                    .OrderBy(p => p.Nome) 
+                    .Skip((pagina - 1) * tamanhoPagina)
+                    .Take(tamanhoPagina)
+                    .ToListAsync();
 
                 var resultadoPaginado = new
                 {
                     TotalItems = totalProdutos,
                     Page = pagina,
                     PageSize = tamanhoPagina,
+                    TotalPages = (int)Math.Ceiling(totalProdutos / (double)tamanhoPagina),
                     Products = produtosPaginados
                 };
 
@@ -50,7 +60,7 @@ namespace Vitrine.Endpoints
 
             rotaProdutos.MapPost("/", (VitrineDbContext contexto, ProdutoDTO produto) =>
             {
-                // Buscar a categoria .IdCategoria
+                
                 Categoria categoria = contexto.Categorias.Find(produto.IdCategoria);
 
                 // Verificar se a categoria existe
@@ -59,7 +69,7 @@ namespace Vitrine.Endpoints
                     return Results.NotFound("Categoria não encontrada");
                 }
 
-                // Insere a categoria encontrada no produto
+               
                 Produto novoProduto = new Produto
                 {
                     Nome = produto.Nome,
@@ -87,7 +97,7 @@ namespace Vitrine.Endpoints
                     return Results.NotFound();
                 }
 
-                // Atualiza o produto 
+                
                 produtoExistente.Nome = produtoAtualizado.Nome;
                 produtoExistente.Descricao = produtoAtualizado.Descricao;
                 

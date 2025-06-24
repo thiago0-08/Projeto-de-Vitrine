@@ -43,7 +43,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Int32Int32Int32ProdutoList<>f__AnonymousType0"
+                  "$ref": "#/components/schemas/Int32Int32Int32Int32ProdutoList<>f__AnonymousType0"
                 }
               }
             }
@@ -310,11 +310,15 @@
           "nome": {
             "type": "string",
             "nullable": true
+          },
+          "imagem_categoria": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Int32Int32Int32ProdutoList<>f__AnonymousType0": {
+      "Int32Int32Int32Int32ProdutoList<>f__AnonymousType0": {
         "type": "object",
         "properties": {
           "totalItems": {
@@ -326,6 +330,10 @@
             "format": "int32"
           },
           "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
             "type": "integer",
             "format": "int32"
           },
