@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import Dropdown from "./dropdown";
 
 import { Api } from "../../Api/api";
 
@@ -58,6 +59,10 @@ export const Navbar = () => {
   setMenuOpen(false);
 };
 
+
+    const {categoria} = useContext(Api);
+    const categoriaData = categoria || [];
+
   
 
   return (
@@ -108,13 +113,10 @@ export const Navbar = () => {
           )}
 
           <li className="nav-item">
-            <NavLink
-              to="/about"
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              Sobre Nós
-            </NavLink>
+            <Dropdown
+             options={categoriaData.map(c => ({value: c.id || '', label: c.nome || 'categoria'}))} >
+             Categoria
+            </Dropdown>
           </li>
           
           <li className="nav-item">
