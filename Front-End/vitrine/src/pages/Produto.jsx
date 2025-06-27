@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import './produto.css';
+import '../css/produto.css';
 
 const Produto = () => {
   const location = useLocation();

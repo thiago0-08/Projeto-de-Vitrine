@@ -1,6 +1,6 @@
-import Carrossel from './components/Carrossel/carrossel';
+import Carrossel from './components/carrossel';
 import Cards from './pages/cards/cards';
-import Rodape from './components/rodape/rodape';
+import Rodape from './components/rodape';
 import Recomendados from './components/recomendados/recomendados';
 
 const Home = () => {

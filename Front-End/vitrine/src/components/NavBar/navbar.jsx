@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
-import "./Navbar.css";
+import "./css/Navbar.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Dropdown from "./dropdown";
-
-import { Api } from "../../Api/api";
+import { Api } from "../Api/api";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

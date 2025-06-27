@@ -1,7 +1,7 @@
-import './cards.css';
+import '../css/cards.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
-import { Api } from '../../Api/api';
+import { Api } from '../services/api';
 
 const Cards = () => {
   const navigate = useNavigate();
