@@ -1,6 +1,6 @@
-import './recomendados.css';
+import '../css/recomendados.css';
 import { useContext } from 'react';
-import { Api } from '../../Api/api';
+import { Api } from '../services/api'; 
 
 
 const Recomendados = () => {

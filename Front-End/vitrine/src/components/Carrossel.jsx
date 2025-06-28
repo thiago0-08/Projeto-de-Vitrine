@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './carrossel.css';
+import '../css/carrossel.css';
 
 const images = [
   'https://acdn-us.mitiendanube.com/stores/002/322/390/themes/toluca/1-img-1915875354-1747434047-b0f62c051926174d7d497230bd0941e51747434047-1920-1920.png?627804160',

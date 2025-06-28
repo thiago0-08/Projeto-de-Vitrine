@@ -1,10 +1,10 @@
-import Navbar from "./components/NavBar/navbar";
+import Navbar from "./components/NavBar/Navbar";
 import Home from "./Home";
-import { ProdutosProvider } from './Api/api';
-import Rodape from "./components/rodape/rodape";
-import Produto from './pages/produtos/Produto';
+import { ProdutosProvider } from './services/api';
+import Rodape from "./components/Rodape";
+import Produto from './pages/Produto';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Cards from './pages/cards/cards';
+import Cards from "./pages/cards";
 const App = () => {
   return (
     <ProdutosProvider>

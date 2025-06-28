@@ -1,4 +1,4 @@
-import './rodape.css';
+import '../css/rodape.css';
 import { FaInstagram, FaFacebook, FaXTwitter} from "react-icons/fa6";
 import {FaPhone, FaMapMarkerAlt} from "react-icons/fa";
 import { Link } from 'react-router-dom';
