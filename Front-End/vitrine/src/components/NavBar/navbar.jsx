@@ -10,44 +10,21 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { fetchProdutos } = useContext(Api);
   
-
-  const scrollToFooter = () => {
-  setMenuOpen(false);
-  
-  if (window.location.pathname === "/") {
-    const footer = document.getElementById("rodape");
-    if (footer) {
-      footer.scrollIntoView({ behavior: "smooth" });
-    }
-  } else {
-   
-    navigate("/#contato");
-
-    setTimeout(() => {
-      const footer = document.getElementById("rodape");
-      if (footer) {
-        footer.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 1000);
-  }
-};
-
-
   const handleSearch = (e) => {
   e.preventDefault();
   
   if (!searchTerm.trim()) {
     // Se o searchTerm estiver vazio, navega para a página inicial
      navigate("/");
-    fetchProdutos(1, 12, ""); // <-- faz a busca sem filtro para resetar os produtos
+    fetchProdutos(1, 12, ""); // faz a busca sem filtro para procura os produtos
     setMenuOpen(false);
     return;
   }
-  // Se já estiver na página de produtos, apenas atualiza a busca
+  // Se estiver na página de produtos apenas atualiza a busca
   if (window.location.pathname === "/cards") {
     fetchProdutos(1, 12, searchTerm.trim());
   } else {
-    // Se não, navega para a página de produtos com o termo de busca
+    //  navega para a página de produtos com o termo de busca
     navigate("/cards");
     
     setTimeout(() => {
@@ -71,7 +48,6 @@ export const Navbar = () => {
           <span className="logo-text">T10 Premium</span>
         </Link>
 
-        {/* Barra de pesquisa - visível em desktop */}
         <form className="search-form" onSubmit={handleSearch}>
           <input
             type="text"
@@ -94,7 +70,7 @@ export const Navbar = () => {
         </div>
 
         <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
-          {/* Barra de pesquisa - visível em mobile quando menu aberto */}
+          {/* Barra de pesquisa mobile*/}
           {menuOpen && (
             <li className="nav-item search-mobile">
               <form className="search-form" onSubmit={handleSearch}>
@@ -113,29 +89,26 @@ export const Navbar = () => {
 
           <li className="nav-item">
             <Dropdown
-             options={categoriaData.map(c => ({value: c.id || '', label: c.nome || 'categoria'}))} >
+             options={categoriaData.map(c => ({value: c.id || '', label: c.nome || 'categoria'}))}
+             onSelect={(option) => {
+              navigate(`/cards?categoria=${option.value}`);
+              setMenuOpen(false);
+             }} >
              Categoria
+             <ul className="dropdown-menu">
+              {categoriaData.map((c) => ( 
+                <li key={c.id} className="dropdown-item">
+                  <NavLink
+                    to={`/cards?categoria=${c.id}`}
+                    className="nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {c.nome}
+                  </NavLink>
+                </li>
+              )) }
+              </ul>
             </Dropdown>
-          </li>
-          
-          <li className="nav-item">
-            <NavLink
-              to="/products"
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              Produtos
-            </NavLink>
-          </li>
-
-          <li className="nav-item">
-            <NavLink
-              className="nav-link"
-              onClick={scrollToFooter}
-              style={{ background: "none", border: "none", cursor: "pointer" }}
-            >
-              Contato
-            </NavLink>
           </li>
         </ul>
       </div>

@@ -27,36 +27,38 @@ export const ProdutosProvider = ({ children }) => {
       })
       .then(data => {
         setCategoria(data);
-        console.log('Categorias:', data);
+        // console.log('Categorias:', data);
       })
       .catch(error => console.error('Erro:', error));
   }, []);
 
   
-  const fetchProdutos = async (page = 1, pageSize = 12, searchTerm = '') => {
-    try {
-      const url = `${URL_API}/produtos?pagina=${page}&tamanhoPagina=${pageSize}${
-        searchTerm ? `&nome=${encodeURIComponent(searchTerm)}` : ''
-      }`;
+  const fetchProdutos = async (page = 1, pageSize = 12, searchTerm = '' , categoriaId = '') => {
+  try {
+    const url = `${URL_API}/produtos?pagina=${page}&tamanhoPagina=${pageSize}` +
+      (searchTerm ? `&nome=${encodeURIComponent(searchTerm)}` : '') +
+      (categoriaId ? `&categoriaId=${categoriaId}` : '');
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Erro ao buscar produtos');
-      }
+    
 
-      const data = await response.json();
-      setProdutos(data.products);
-      setPagination({
-        currentPage: data.page,
-        totalPages: data.totalPages,
-        pageSize: data.pageSize
-      });
-
-      console.log('Produtos buscados:', data);
-    } catch (error) {
-      console.error('Erro ao buscar produtos:', error);
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Erro ao buscar produtos');
     }
-  };
+
+    const data = await response.json();
+    setProdutos(data.products);
+    setPagination({
+      currentPage: data.page,
+      totalPages: data.totalPages,
+      pageSize: data.pageSize
+    });
+
+  } catch (error) {
+    console.error('Erro ao buscar produtos:', error);
+  }
+};
+
 
   return (
     <Api.Provider value={{ produtos, categoria, fetchProdutos, pagination }}>

@@ -1,14 +1,26 @@
 import '../css/cards.css';
-import { useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'; 
+import { useContext, useEffect } from 'react';
 import { Api } from '../services/api';
 
 const Cards = () => {
   const navigate = useNavigate();
+  const location = useLocation(); 
   const { produtos, pagination, fetchProdutos } = useContext(Api);
-  
+
   const cardsData = produtos || [];
   const { currentPage, totalPages } = pagination;
+
+  const params = new URLSearchParams(location.search);
+  const categoriaId = params.get('categoria');
+
+
+  useEffect(() => {
+  // console.log("CategoriaId capturado:", categoriaId);
+  fetchProdutos(1, 12, '', categoriaId);
+  window.scrollTo(0, 0);
+}, [location.search]);
+
 
   if (!produtos) {
     return <div className="loading">Carregando produtos...</div>;
@@ -23,7 +35,7 @@ const Cards = () => {
   };
 
   const handlePageChange = (pageNumber) => {
-    fetchProdutos(pageNumber);
+    fetchProdutos(pageNumber, 12, '', categoriaId);
   };
 
   return (
@@ -41,11 +53,9 @@ const Cards = () => {
           </div>
         ))}
       </div>
-      
+
       <div className="pagination-info">
-        <p>
-          Página {currentPage} de {totalPages}
-        </p>
+        <p>Página {currentPage} de {totalPages}</p>
       </div>
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
@@ -61,6 +71,6 @@ const Cards = () => {
       </div>
     </>
   );
-}
+};
 
 export default Cards;

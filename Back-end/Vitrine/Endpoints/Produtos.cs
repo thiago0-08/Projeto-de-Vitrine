@@ -14,17 +14,21 @@ namespace Vitrine.Endpoints
            
             RouteGroupBuilder rotaProdutosPorCategoria = rotas.MapGroup("/produtosPorCategoria");
 
-            rotaProdutos.MapGet("/", async (VitrineDbContext contexto, string? nome, int pagina = 1, int tamanhoPagina = 10) =>
+            rotaProdutos.MapGet("/", async (VitrineDbContext contexto, string? nome, int pagina = 1, int tamanhoPagina = 10, int? categoriaId = null) =>
             {
-                IQueryable<Produto> produtosQuery = contexto.Produtos.AsQueryable();
+                IQueryable<Produto> produtosQuery = contexto.Produtos.Include(p => p.Categoria);
 
                 if (!string.IsNullOrEmpty(nome))
                 {
-                    //case-insensitive no PostgreSQL 
                     produtosQuery = produtosQuery.Where(p => EF.Functions.ILike(p.Nome, $"%{nome}%"));
                 }
 
-               
+                if (categoriaId.HasValue)
+                {
+                    produtosQuery = produtosQuery.Where(p => p.Categoria.Id == categoriaId.Value);
+                }
+
+
                 var totalProdutos = await produtosQuery.CountAsync();
 
                

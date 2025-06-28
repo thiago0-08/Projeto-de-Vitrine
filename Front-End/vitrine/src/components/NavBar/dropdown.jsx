@@ -10,7 +10,7 @@ const Dropdown = ({ options, onSelect, placeholder = "Selecione..." }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    onSelect(option);
+     if (onSelect) onSelect(option);
     setIsOpen(false);
   };
 
