@@ -35,6 +35,14 @@
               "format": "int32",
               "default": 10
             }
+          },
+          {
+            "name": "categoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
         ],
         "responses": {
