@@ -9,37 +9,37 @@ export const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { fetchProdutos } = useContext(Api);
-  
+
   const handleSearch = (e) => {
-  e.preventDefault();
-  
-  if (!searchTerm.trim()) {
-    // Se o searchTerm estiver vazio, navega para a página inicial
-     navigate("/");
-    fetchProdutos(1, 12, ""); // faz a busca sem filtro para procura os produtos
-    setMenuOpen(false);
-    return;
-  }
-  // Se estiver na página de produtos apenas atualiza a busca
-  if (window.location.pathname === "/cards") {
-    fetchProdutos(1, 12, searchTerm.trim());
-  } else {
-    //  navega para a página de produtos com o termo de busca
-    navigate("/cards");
-    
-    setTimeout(() => {
+    e.preventDefault();
+
+    if (!searchTerm.trim()) {
+      // Se a barra  estiver vazia, vokta para a página inicial
+      navigate("/");
+      fetchProdutos(1, 12, "");   // faz a busca sem os filtro 
+      setMenuOpen(false);
+      return;
+    }
+    // Se estiver na página de produtos apenas atualiza a busca
+    if (window.location.pathname === "/cards") {
       fetchProdutos(1, 12, searchTerm.trim());
-    }, 1000);
-  }
-  
-  setMenuOpen(false);
-};
+    } else {
+      //  navega para a página de produtos com o termo de busca
+      navigate("/cards");
+
+      setTimeout(() => {
+        fetchProdutos(1, 12, searchTerm.trim());
+      }, 1000);
+    }
+
+    setMenuOpen(false);
+  };
 
 
-    const {categoria} = useContext(Api);
-    const categoriaData = categoria || [];
+  const { categoria } = useContext(Api);
+  const categoriaData = categoria || [];
 
-  
+
 
   return (
     <nav className="navbar">
@@ -89,24 +89,24 @@ export const Navbar = () => {
 
           <li className="nav-item">
             <Dropdown
-             options={categoriaData.map(c => ({value: c.id || '', label: c.nome || 'categoria'}))}
-             onSelect={(option) => {
-              navigate(`/cards?categoria=${option.value}`);
-              setMenuOpen(false);
-             }} >
-             Categoria
-             <ul className="dropdown-menu">
-              {categoriaData.map((c) => ( 
-                <li key={c.id} className="dropdown-item">
-                  <NavLink
-                    to={`/cards?categoria=${c.id}`}
-                    className="nav-link"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {c.nome}
-                  </NavLink>
-                </li>
-              )) }
+              options={categoriaData.map(c => ({ value: c.id || '', label: c.nome || 'categoria' }))}
+              onSelect={(option) => {
+                navigate(`/cards?categoria=${option.value}`);
+                setMenuOpen(false);
+              }} >
+              Categoria
+              <ul className="dropdown-menu">
+                {categoriaData.map((c) => (
+                  <li key={c.id} className="dropdown-item">
+                    <NavLink
+                      to={`/cards?categoria=${c.id}`}
+                      className="nav-link"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {c.nome}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </Dropdown>
           </li>

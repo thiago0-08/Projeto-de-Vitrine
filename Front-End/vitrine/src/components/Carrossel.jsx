@@ -24,7 +24,7 @@ const Carrossel = () => {
   }, []);
 
   return (
-    <div className="carousel">
+    <div className="carrossel">
       <button className="arrow left" onClick={prevSlide}>
         &#10094;
       </button>

@@ -9,6 +9,8 @@ const Recomendados = () => {
     const cardsData = categoria || [];
 
 
+
+    
     return (
         <div className="recomendados">
             <h2 className='recomendados-title'>Procure por Competições </h2>
