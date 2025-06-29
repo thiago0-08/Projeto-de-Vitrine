@@ -13,7 +13,6 @@ namespace Vitrine.Model
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public double Preco { get; set; }
-        //public double[] Tamanhos { get; set; }
         public string[] Tamanhos { get; set; }
         public string[] Cores { get; set; }
         public string Imagem { get; set; }
