@@ -14,7 +14,14 @@ namespace Vitrine.Endpoints
            
             RouteGroupBuilder rotaProdutosPorCategoria = rotas.MapGroup("/produtosPorCategoria");
 
-            rotaProdutos.MapGet("/", async (VitrineDbContext contexto, string? nome, int pagina = 1, int tamanhoPagina = 10, int? categoriaId = null) =>
+            rotaProdutos.MapGet("/", async (
+                VitrineDbContext contexto,
+                string? nome,
+                int pagina = 1,
+                int tamanhoPagina = 10,
+                int? categoriaId = null,
+                string ordenarPor = "nome"  
+            ) =>
             {
                 IQueryable<Produto> produtosQuery = contexto.Produtos.Include(p => p.Categoria);
 
@@ -29,14 +36,66 @@ namespace Vitrine.Endpoints
                 }
 
 
+                if (ordenarPor.ToLower() == "preco")
+                {
+                    produtosQuery = produtosQuery.OrderBy(p => p.Preco);
+                }
+                else
+                {
+                    produtosQuery = produtosQuery.OrderBy(p => p.Nome);
+                }
+
+
                 var totalProdutos = await produtosQuery.CountAsync();
 
-               
+
                 var produtosPaginados = await produtosQuery
-                    .OrderBy(p => p.Nome) 
+                    .OrderBy(p => p.Nome)
                     .Skip((pagina - 1) * tamanhoPagina)
                     .Take(tamanhoPagina)
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.Nome,
+                        p.Descricao,
+                        p.Preco,
+                        p.Tamanhos,
+                        p.Cores,
+                        p.Imagem,
+                        Categoria = new { p.Categoria.Id, p.Categoria.Nome },
+
+                                    // Estoque atual
+                     EstoqueAtual = contexto.Lancamentos
+                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "entrada")
+                        .Sum(l => (int?)l.Quantidade) ?? 0
+                    -
+                    contexto.Lancamentos
+                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "saida")
+                        .Sum(l => (int?)l.Quantidade) ?? 0,
+
+                                    // Indisponível = estoque zerado
+                    Indisponivel = (
+                    (contexto.Lancamentos
+                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "entrada")
+                        .Sum(l => (int?)l.Quantidade) ?? 0)
+                    -
+                    (contexto.Lancamentos
+                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "saida")
+                        .Sum(l => (int?)l.Quantidade) ?? 0)
+                         ) <= 0,
+
+                                    //  Novos campos
+                     TotalEntradas = contexto.Lancamentos
+                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "entrada")
+                        .Sum(l => (int?)l.Quantidade) ?? 0,
+
+                     TotalSaidas = contexto.Lancamentos
+                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "saida")
+                        .Sum(l => (int?)l.Quantidade) ?? 0
+                    })
+
                     .ToListAsync();
+
 
                 var resultadoPaginado = new
                 {
@@ -64,7 +123,12 @@ namespace Vitrine.Endpoints
 
             rotaProdutos.MapPost("/", (VitrineDbContext contexto, ProdutoDTO produto) =>
             {
-                
+                var nomeRepetido = contexto.Produtos.Any(p => p.Nome == produto.Nome);
+                if (nomeRepetido)
+                {
+                    return Results.Conflict("Já existe um produto com esse nome.");
+                }
+
                 Categoria categoria = contexto.Categorias.Find(produto.IdCategoria);
 
                 // Verificar se a categoria existe

@@ -1,4 +1,5 @@
-﻿using Database;
+﻿using Microsoft.EntityFrameworkCore;
+using Database;
 using Vitrine.Model;
 
 public static class Categorias
@@ -28,6 +29,12 @@ public static class Categorias
 
         rotaCategorias.MapPost("/", async (VitrineDbContext contexto, Categoria categoria) =>
         {
+            var nomeJaexistente = await contexto.Categorias.AnyAsync(c => c.Nome == categoria.Nome);
+            if (nomeJaexistente)
+            {
+                return Results.Conflict("Já existe uma categoria com esse nome.");
+            }
+
             contexto.Categorias.Add(categoria);
             await contexto.SaveChangesAsync();
 

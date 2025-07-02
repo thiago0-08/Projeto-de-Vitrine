@@ -32,7 +32,7 @@ namespace Vitrine
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.RegistrarEndpointsLancamento();
             app.UseCors("permitirTudo");
 
             app.RegistrarEndpointsProduto();

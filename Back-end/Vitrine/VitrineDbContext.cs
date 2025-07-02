@@ -10,6 +10,7 @@ public partial class VitrineDbContext : DbContext
 {
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
+    public DbSet <Lancamento> Lancamentos { get; set; }
 
     public VitrineDbContext()
     {
