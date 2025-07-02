@@ -1,13 +1,14 @@
 import '../css/cards.css';
 import { useNavigate, useLocation } from 'react-router-dom'; 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Api } from '../services/api';
 
 const Cards = () => {
   const navigate = useNavigate();
   const location = useLocation(); 
   const { produtos, pagination, fetchProdutos } = useContext(Api);
-
+  const [ordenarPor, setOrdenarPor ] = useState('nome');
+  const [apenasDisponiveis, setApenasDisponiveis] = useState(false);
   const cardsData = produtos || [];
   const { currentPage, totalPages } = pagination;
 
@@ -19,7 +20,7 @@ const Cards = () => {
   // console.log("CategoriaId capturado:", categoriaId);
   fetchProdutos(1, 12, '', categoriaId);
   window.scrollTo(0, 0);
-}, [location.search]);
+}, [location.search, ordenarPor, apenasDisponiveis]);
 
 
   if (!produtos) {
@@ -35,14 +36,28 @@ const Cards = () => {
   };
 
   const handlePageChange = (pageNumber) => {
-    fetchProdutos(pageNumber, 12, '', categoriaId);
+    fetchProdutos(pageNumber, 12, '', categoriaId, ordenarPor, apenasDisponiveis);
   };
 
   return (
     <>
+      <div className='Filtro-produtos'>
+        <label>
+          <input type="checkbox" checked={apenasDisponiveis} onChange={(e) => setApenasDisponiveis(e.target.checked)} />
+          Mostrar apenas produtos disponíveis
+        </label>
+
+        <select value={ordenarPor} onChange={(e) => setOrdenarPor(e.target.value)}>
+          <option value="nome"> Ordem Crecente </option>
+          <option value="-nome">Ordem Decrecente </option>
+          <option value="preco">Preço Crescente</option>
+          <option value="-preco">Preço Decrecente</option>
+          </select>
+      </div>
+
       <div className="cards-container">
         {cardsData.map((produto, index) => (
-          <div key={index} className="card">
+          <div key={index} className={`card ${produto.indisponivel ? 'indisponivel' : ''}`}>
             <img src={produto.imagem} alt={produto.nome} className="card-image" />
             <h3 className="card-title">{produto.nome}</h3>
             <p className="card-description">{produto.descricao}</p>

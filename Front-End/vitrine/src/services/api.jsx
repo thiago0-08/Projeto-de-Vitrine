@@ -33,11 +33,13 @@ export const ProdutosProvider = ({ children }) => {
   }, []);
 
   
-  const fetchProdutos = async (page = 1, pageSize = 12, searchTerm = '' , categoriaId = '') => {
+  const fetchProdutos = async (page = 1, pageSize = 12, searchTerm = '' , categoriaId = '', ordenarPor = 'nome', apenasDisponiveis = false) => {
   try {
     const url = `${URL_API}/produtos?pagina=${page}&tamanhoPagina=${pageSize}` +
       (searchTerm ? `&nome=${encodeURIComponent(searchTerm)}` : '') +
-      (categoriaId ? `&categoriaId=${categoriaId}` : '');
+      (categoriaId ? `&categoriaId=${categoriaId}` : ''); +
+      `&ordenarPor=${ordenarPor}` +
+      (apenasDisponiveis ? `&apenasDisponiveis=true` : '');
 
     
 

@@ -111,6 +111,11 @@ export const Navbar = () => {
             </Dropdown>
           </li>
         </ul>
+        <div className="nav-links">
+          <NavLink to="/Lancamentos" className="nav-link" onClick={() => setMenuOpen(false)}>
+            Home
+          </NavLink>
+        </div>
       </div>
     </nav>
   );
