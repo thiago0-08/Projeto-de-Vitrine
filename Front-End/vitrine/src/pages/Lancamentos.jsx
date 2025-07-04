@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { Api } from '../services/api';
 import '../css/lancamentos.css';
+import { VscError } from "react-icons/vsc";
+
 
 const Lancamentos = () => {
   const { produtos, fetchProdutos } = useContext(Api);
@@ -27,38 +29,49 @@ const Lancamentos = () => {
   }, [produtoId, produtos]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMensagem('');
+  e.preventDefault();
+  setMensagem('');
 
-    try {
-      const lancamento = {
-        produtoId: parseInt(produtoId),
-        quantidade: parseInt(quantidade),
-        tipo: tipo,
-        data: new Date().toISOString()
-      };
+  try {
+  if (tipo === 'saida' && parseInt(quantidade) > estoqueAtual) {
+    setMensagem(` Erro: Estoque insuficiente. Estoque atual: ${estoqueAtual}`);
+    return;
+  }
 
-      const response = await fetch(URL_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(lancamento)
-      });
-
-      if (!response.ok) {
-        const erro = await response.text();
-        throw new Error(erro);
-      }
-
-      setMensagem('✅ Lançamento realizado com sucesso!');
-      setQuantidade(1);
-      setTipo('entrada');
-      setProdutoId('');
-      setEstoqueAtual(null);
-      fetchProdutos(); // atualizar a lista com novo estoque
-    } catch (error) {
-      setMensagem(`❌ Erro: ${error.message}`);
-    }
+  const lancamento = {
+    produtoId: parseInt(produtoId),
+    quantidade: parseInt(quantidade),
+    tipo: tipo,
   };
+
+  const response = await fetch(URL_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(lancamento)
+  });
+
+  if (!response.ok) {
+    const erro = await response.text();
+    throw new Error(erro);
+  }
+
+  setMensagem(' Lançamento realizado com sucesso!');
+  setQuantidade(1);
+  setTipo('entrada');
+
+  const novosProdutos = await fetchProdutos();
+  const produtoAtualizado = novosProdutos.find(p => p.id === parseInt(produtoId));
+  if (produtoAtualizado) {
+    setEstoqueAtual(produtoAtualizado.estoqueAtual);
+  }
+
+} catch (error) {
+  setMensagem(` Erro: ${error.message}`);
+}
+
+};
+
+
 
   return (
     <div className="lancamentos-container">

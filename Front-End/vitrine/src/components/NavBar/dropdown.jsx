@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './dropdown.css'; // Importe o arquivo CSS
+import './dropdown.css'; 
+import { IoIosArrowDropdownCircle } from "react-icons/io";
 
-const Dropdown = ({ options, onSelect, placeholder = "Selecione..." }) => {
+
+const Dropdown = ({ options, onSelect, placeholder = "Buscar por ..." }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const dropdownRef = useRef(null);
@@ -14,7 +16,7 @@ const Dropdown = ({ options, onSelect, placeholder = "Selecione..." }) => {
     setIsOpen(false);
   };
 
-  // Fechar o dropdown ao clicar fora
+  // Fechar o dropdown ao clicar fora dele
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -32,7 +34,7 @@ const Dropdown = ({ options, onSelect, placeholder = "Selecione..." }) => {
     <div className="dropdown" ref={dropdownRef}>
       <div className="dropdown-header" onClick={toggleDropdown}>
         {selectedOption ? selectedOption.label : placeholder}
-        <span className={`dropdown-icon ${isOpen ? 'open' : ''}`}>▼</span>
+        <span className={`dropdown-icon ${isOpen ? 'open' : ''}`}> <IoIosArrowDropdownCircle /> </span>
       </div>
       {isOpen && (
         <ul className="dropdown-list">

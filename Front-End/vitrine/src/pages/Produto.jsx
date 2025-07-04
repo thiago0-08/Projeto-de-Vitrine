@@ -23,6 +23,7 @@ const Produto = () => {
         <div className="produto-info">
           <h1 className="produto-title">{produto.nome}</h1>
           <p className="produto-descricao">Descrição: {produto.descricao}</p>
+          <p className='produto-quantidade'> Quantidade Disponivel: {produto.estoqueAtual}</p>
 
           <div className="produto-tamanho">
             <span>Selecione um tamanho:</span>

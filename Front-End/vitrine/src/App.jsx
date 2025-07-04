@@ -1,14 +1,16 @@
+// App.jsx
 import '../src/css/App.css';
-
 
 import Navbar from "./components/NavBar/Navbar";
 import Home from "./Home";
 import { ProdutosProvider } from './services/api';
 import Rodape from "./components/Rodape";
 import Produto from './pages/Produto';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Cards from "./pages/cards";
 import Lancamentos from "./pages/Lancamentos";
+import Login from "./Login";
+import ProtectedRoute from './components/ProtectedRoute'; // novo componente para autenticação
 
 const App = () => {
   return (
@@ -23,7 +25,12 @@ const App = () => {
               <Route path="/services" element={<h1>Services Page</h1>} />
               <Route path="/produto" element={<Produto />} />
               <Route path="/cards" element={<Cards />} />
-              <Route path="/lancamentos" element={<Lancamentos />} />
+              <Route path="/lancamentos" element={
+                <ProtectedRoute>
+                  <Lancamentos />
+                </ProtectedRoute>
+              } />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </main>
           <Rodape />

@@ -1,6 +1,9 @@
 import React, { useState, useContext } from "react";
 import '../../css/navbar.css';
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FcSearch } from "react-icons/fc";
+import { VscAccount } from "react-icons/vsc";
+import { TiThMenu } from "react-icons/ti";
 import Dropdown from "./dropdown";
 import { Api } from "../../services/api";
 
@@ -24,7 +27,7 @@ export const Navbar = () => {
     if (window.location.pathname === "/cards") {
       fetchProdutos(1, 12, searchTerm.trim());
     } else {
-      //  navega para a página de produtos com o termo de busca
+      //  navega para a página de produtos com o resultado da busca
       navigate("/cards");
 
       setTimeout(() => {
@@ -48,6 +51,7 @@ export const Navbar = () => {
           <span className="logo-text">T10 Premium</span>
         </Link>
 
+        {/* PESQUISA DESKTOP */}
         <form className="search-form" onSubmit={handleSearch}>
           <input
             type="text"
@@ -56,44 +60,36 @@ export const Navbar = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button type="submit">
-            <i className="search-icon">🔍</i>
+            <i className="search-icon"><FcSearch /></i>
           </button>
         </form>
 
-        <div
-          className={`hamburger ${menuOpen ? "active" : ""}`}
+        {/* HAMBURGER */}
+        <div className={`hamburger ${menuOpen ? "active" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
+          <TiThMenu />
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
         </div>
 
-        <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
-          {/* Barra de pesquisa mobile*/}
-          {menuOpen && (
-            <li className="nav-item search-mobile">
-              <form className="search-form" onSubmit={handleSearch}>
-                <input
-                  type="text"
-                  placeholder="Pesquisar produtos..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button type="submit">
-                  <i className="search-icon">🔍</i>
-                </button>
-              </form>
-            </li>
-          )}
 
+
+
+        {/* MENU MOBILE/DESKTOP */}
+        <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
+          
+
+          {/* LINKS DO MENU */}
           <li className="nav-item">
             <Dropdown
               options={categoriaData.map(c => ({ value: c.id || '', label: c.nome || 'categoria' }))}
               onSelect={(option) => {
                 navigate(`/cards?categoria=${option.value}`);
                 setMenuOpen(false);
-              }} >
+              }}
+            >
               Categoria
               <ul className="dropdown-menu">
                 {categoriaData.map((c) => (
@@ -110,13 +106,27 @@ export const Navbar = () => {
               </ul>
             </Dropdown>
           </li>
+
+          <li className="nav-item">
+            <NavLink to="/Lancamentos" className="nav-link" onClick={() => setMenuOpen(false)}>
+              Home
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink to="/Login" className="nav-link" onClick={() => setMenuOpen(false)}>
+              <VscAccount />
+            </NavLink>
+          </li>
         </ul>
-        <div className="nav-links">
-          <NavLink to="/Lancamentos" className="nav-link" onClick={() => setMenuOpen(false)}>
-            Home
-          </NavLink>
-        </div>
+
+
+        {/* <NavLink to="/Lancamentos" className="nav-link" onClick={() => setMenuOpen(false)}>
+            <VscAccount />
+          </NavLink>   */}
+
       </div>
+
     </nav>
   );
 };

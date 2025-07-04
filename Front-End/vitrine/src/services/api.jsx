@@ -41,6 +41,8 @@ export const ProdutosProvider = ({ children }) => {
       `&ordenarPor=${ordenarPor}` +
       (apenasDisponiveis ? `&apenasDisponiveis=true` : '');
 
+      
+
     
 
     const response = await fetch(url);
@@ -56,6 +58,9 @@ export const ProdutosProvider = ({ children }) => {
       pageSize: data.pageSize
     });
 
+
+  
+return data.products;
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
   }

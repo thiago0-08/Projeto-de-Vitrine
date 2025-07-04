@@ -95,6 +95,13 @@
   color: #6b7280;
 }
 
+.produto-quantidade{
+  font-size: 1.5rem;
+  color: #858588;
+  margin: 0;
+  padding: 2px;
+  margin-top: 8px;
+}
 
 .tamanho-selecionado {
   font-size: 1,5rem;
