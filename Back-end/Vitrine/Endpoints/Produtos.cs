@@ -15,13 +15,13 @@ namespace Vitrine.Endpoints
             RouteGroupBuilder rotaProdutosPorCategoria = rotas.MapGroup("/produtosPorCategoria");
 
             rotaProdutos.MapGet("/", async (
-                VitrineDbContext contexto,
-                string? nome,
-                int pagina = 1,
-                int tamanhoPagina = 10,
-                int? categoriaId = null,
-                string ordenarPor = "nome"  
-            ) =>
+     VitrineDbContext contexto,
+     string? nome,
+     int pagina = 1,
+     int tamanhoPagina = 10,
+     int? categoriaId = null,
+     string ordenarPor = "nome"
+ ) =>
             {
                 IQueryable<Produto> produtosQuery = contexto.Produtos.Include(p => p.Categoria);
 
@@ -35,25 +35,47 @@ namespace Vitrine.Endpoints
                     produtosQuery = produtosQuery.Where(p => p.Categoria.Id == categoriaId.Value);
                 }
 
-
-                if (ordenarPor.ToLower() == "preco")
-                {
-                    produtosQuery = produtosQuery.OrderBy(p => p.Preco);
-                }
-                else
-                {
-                    produtosQuery = produtosQuery.OrderBy(p => p.Nome);
-                }
-
-
                 var totalProdutos = await produtosQuery.CountAsync();
 
+                // Aplica ordenação
+                produtosQuery = ordenarPor.ToLower() switch
+                {
+                    "-preco" => produtosQuery.OrderByDescending(p => p.Preco),
+                    "preco" => produtosQuery.OrderBy(p => p.Preco),
+                    "-nome" => produtosQuery.OrderByDescending(p => p.Nome),
+                    _ => produtosQuery.OrderBy(p => p.Nome)
+                };
 
+                // Pagina os produtos
                 var produtosPaginados = await produtosQuery
-                    .OrderBy(p => p.Nome)
                     .Skip((pagina - 1) * tamanhoPagina)
                     .Take(tamanhoPagina)
-                    .Select(p => new
+                    .ToListAsync();
+
+                // Pega os IDs dos produtos para buscar os lançamentos
+                var produtoIds = produtosPaginados.Select(p => p.Id).ToList();
+
+                // Busca os lançamentos em lote
+                var lancamentos = await contexto.Lancamentos
+                    .Where(l => produtoIds.Contains(l.ProdutoId))
+                    .GroupBy(l => l.ProdutoId)
+                    .Select(g => new
+                    {
+                        ProdutoId = g.Key,
+                        TotalEntradas = g.Where(l => l.Tipo == "entrada").Sum(l => l.Quantidade),
+                        TotalSaidas = g.Where(l => l.Tipo == "saida").Sum(l => l.Quantidade)
+                    })
+                    .ToListAsync();
+
+                // Monta resposta final com junção dos dados
+                var resultado = produtosPaginados.Select(p =>
+                {
+                    var lanc = lancamentos.FirstOrDefault(l => l.ProdutoId == p.Id);
+                    int entradas = lanc?.TotalEntradas ?? 0;
+                    int saidas = lanc?.TotalSaidas ?? 0;
+                    int estoqueAtual = entradas - saidas;
+
+                    return new
                     {
                         p.Id,
                         p.Nome,
@@ -63,39 +85,12 @@ namespace Vitrine.Endpoints
                         p.Cores,
                         p.Imagem,
                         Categoria = new { p.Categoria.Id, p.Categoria.Nome },
-
-                                    // Estoque atual
-                     EstoqueAtual = contexto.Lancamentos
-                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "entrada")
-                        .Sum(l => (int?)l.Quantidade) ?? 0
-                    -
-                    contexto.Lancamentos
-                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "saida")
-                        .Sum(l => (int?)l.Quantidade) ?? 0,
-
-                                    // Indisponível = estoque zerado
-                    Indisponivel = (
-                    (contexto.Lancamentos
-                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "entrada")
-                        .Sum(l => (int?)l.Quantidade) ?? 0)
-                    -
-                    (contexto.Lancamentos
-                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "saida")
-                        .Sum(l => (int?)l.Quantidade) ?? 0)
-                         ) <= 0,
-
-                                    //  Novos campos
-                     TotalEntradas = contexto.Lancamentos
-                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "entrada")
-                        .Sum(l => (int?)l.Quantidade) ?? 0,
-
-                     TotalSaidas = contexto.Lancamentos
-                        .Where(l => l.ProdutoId == p.Id && l.Tipo == "saida")
-                        .Sum(l => (int?)l.Quantidade) ?? 0
-                    })
-
-                    .ToListAsync();
-
+                        EstoqueAtual = estoqueAtual,
+                        Indisponivel = estoqueAtual <= 0,
+                        TotalEntradas = entradas,
+                        TotalSaidas = saidas
+                    };
+                });
 
                 var resultadoPaginado = new
                 {
@@ -103,11 +98,12 @@ namespace Vitrine.Endpoints
                     Page = pagina,
                     PageSize = tamanhoPagina,
                     TotalPages = (int)Math.Ceiling(totalProdutos / (double)tamanhoPagina),
-                    Products = produtosPaginados
+                    Products = resultado
                 };
 
                 return TypedResults.Ok(resultadoPaginado);
             });
+
 
             rotaProdutos.MapGet("/{id}", (VitrineDbContext contexto, int id) =>
             {

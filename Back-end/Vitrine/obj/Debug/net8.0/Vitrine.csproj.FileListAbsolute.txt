@@ -851,3 +851,4 @@ C:\Users\Gamer\OneDrive\Área de Trabalho\sites thiago\app-bootcamp\Back-end\Vit
 C:\Users\Gamer\OneDrive\Área de Trabalho\sites thiago\app-bootcamp\Back-end\Vitrine\obj\Debug\net8.0\Vitrine.pdb
 C:\Users\Gamer\OneDrive\Área de Trabalho\sites thiago\app-bootcamp\Back-end\Vitrine\obj\Debug\net8.0\Vitrine.genruntimeconfig.cache
 C:\Users\Gamer\OneDrive\Área de Trabalho\sites thiago\app-bootcamp\Back-end\Vitrine\obj\Debug\net8.0\ref\Vitrine.dll
+C:\Users\Gamer\OneDrive\Área de Trabalho\sites thiago\app-bootcamp\Back-end\Vitrine\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

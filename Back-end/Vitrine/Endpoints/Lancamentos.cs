@@ -64,7 +64,7 @@ namespace Vitrine.Endpoints
                     return Results.BadRequest("Estoque insuficiente para essa saída.");
                 }
 
-                lancamento.Data = DateTime.UtcNow;
+                lancamento.Data = DateTime.UtcNow.AddTicks(1);
 
                 contexto.Lancamentos.Add(lancamento);
                 await contexto.SaveChangesAsync();
