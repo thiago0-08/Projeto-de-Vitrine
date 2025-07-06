@@ -43,7 +43,7 @@ Funcionalidades:
 • produtos sem estoque nao pode ser visto 
 
 • tela login com senha 
-( dmin e 1234 )
+( admin e 1234 )
  # Back-End 
 
 
