@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Vitrine.Endpoints;
+
 
 namespace Vitrine.Model
 {

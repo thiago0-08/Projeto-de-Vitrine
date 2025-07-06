@@ -5,10 +5,220 @@
     "version": "1.0"
   },
   "paths": {
-    "/lancamentos/produto/{produtoId}": {
+    "/api/Carrossel": {
       "get": {
         "tags": [
-          "Vitrine"
+          "Carrossel"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Carrossel"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carrossel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carrossel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carrossel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Carrossel/{id}": {
+      "get": {
+        "tags": [
+          "Carrossel"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Carrossel"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Categorias": {
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categorias"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Categorias/{id}": {
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Lancamentos/produto/{produtoId}": {
+      "get": {
+        "tags": [
+          "Lancamentos"
         ],
         "parameters": [
           {
@@ -28,10 +238,10 @@
         }
       }
     },
-    "/lancamentos": {
+    "/api/Lancamentos": {
       "post": {
         "tags": [
-          "Vitrine"
+          "Lancamentos"
         ],
         "requestBody": {
           "content": {
@@ -39,9 +249,18 @@
               "schema": {
                 "$ref": "#/components/schemas/Lancamento"
               }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lancamento"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lancamento"
+              }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -50,10 +269,41 @@
         }
       }
     },
-    "/produtos": {
+    "/admin/login": {
+      "post": {
+        "tags": [
+          "LoginAdmin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Produtos": {
       "get": {
         "tags": [
-          "Vitrine"
+          "Produtos"
         ],
         "parameters": [
           {
@@ -78,7 +328,7 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 10
+              "default": 12
             }
           },
           {
@@ -96,24 +346,25 @@
               "type": "string",
               "default": "nome"
             }
+          },
+          {
+            "name": "apenasDisponiveis",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Int32Int32Int32Int32Int32StringStringDoubleStringArrayStringArrayStringInt32String<>f__AnonymousType2Int32BooleanInt32Int32<>f__AnonymousType1IEnumerable<>f__AnonymousType3"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
       "post": {
         "tags": [
-          "Vitrine"
+          "Produtos"
         ],
         "requestBody": {
           "content": {
@@ -121,79 +372,34 @@
               "schema": {
                 "$ref": "#/components/schemas/ProdutoDTO"
               }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/produtos/{id}": {
-      "get": {
-        "tags": [
-          "Vitrine"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/produtos/{Id}": {
-      "put": {
-        "tags": [
-          "Vitrine"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
+            },
+            "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Produto"
+                "$ref": "#/components/schemas/ProdutoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoDTO"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Produtos/{id}": {
       "delete": {
         "tags": [
-          "Vitrine"
+          "Produtos"
         ],
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -205,106 +411,16 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/produtosPorCategoria/{IdCategoria}": {
-      "get": {
-        "tags": [
-          "Vitrine"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/categorias": {
-      "get": {
-        "tags": [
-          "Vitrine"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Categoria"
-                  }
-                }
-              }
-            }
           }
         }
       },
-      "post": {
-        "tags": [
-          "Vitrine"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Categoria"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/categorias/{id}": {
-      "get": {
-        "tags": [
-          "Vitrine"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/categorias/{Id}": {
       "put": {
         "tags": [
-          "Vitrine"
+          "Produtos"
         ],
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -317,33 +433,21 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Categoria"
+                "$ref": "#/components/schemas/ProdutoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoDTO"
               }
             }
-          },
-          "required": true
+          }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Vitrine"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -354,6 +458,20 @@
   },
   "components": {
     "schemas": {
+      "Carrossel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Categoria": {
         "type": "object",
         "properties": {
@@ -372,107 +490,6 @@
           "imagem_categoria": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Int32Int32Int32Int32Int32StringStringDoubleStringArrayStringArrayStringInt32String<>f__AnonymousType2Int32BooleanInt32Int32<>f__AnonymousType1IEnumerable<>f__AnonymousType3": {
-        "type": "object",
-        "properties": {
-          "totalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "products": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Int32StringStringDoubleStringArrayStringArrayStringInt32String<>f__AnonymousType2Int32BooleanInt32Int32<>f__AnonymousType1"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Int32String<>f__AnonymousType2": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Int32StringStringDoubleStringArrayStringArrayStringInt32String<>f__AnonymousType2Int32BooleanInt32Int32<>f__AnonymousType1": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "preco": {
-            "type": "number",
-            "format": "double"
-          },
-          "tamanhos": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "cores": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "imagem": {
-            "type": "string",
-            "nullable": true
-          },
-          "categoria": {
-            "$ref": "#/components/schemas/Int32String<>f__AnonymousType2"
-          },
-          "estoqueAtual": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "indisponivel": {
-            "type": "boolean"
-          },
-          "totalEntradas": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalSaidas": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -507,6 +524,14 @@
         "additionalProperties": false
       },
       "Produto": {
+        "required": [
+          "categoria",
+          "descricao",
+          "id",
+          "imagem",
+          "nome",
+          "preco"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -514,12 +539,12 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "preco": {
             "type": "number",
@@ -540,8 +565,8 @@
             "nullable": true
           },
           "imagem": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "categoria": {
             "$ref": "#/components/schemas/Categoria"
@@ -550,15 +575,23 @@
         "additionalProperties": false
       },
       "ProdutoDTO": {
+        "required": [
+          "descricao",
+          "idCategoria",
+          "imagem",
+          "nome",
+          "preco",
+          "tamanhos"
+        ],
         "type": "object",
         "properties": {
           "nome": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "preco": {
             "type": "number",
@@ -568,8 +601,7 @@
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "nullable": true
+            }
           },
           "cores": {
             "type": "array",
@@ -579,12 +611,26 @@
             "nullable": true
           },
           "imagem": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "idCategoria": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "senha": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

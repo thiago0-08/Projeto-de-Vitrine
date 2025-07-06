@@ -1,44 +1,50 @@
 using Database;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Vitrine.Endpoints;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
-namespace Vitrine
+var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddCors(options =>
 {
-    public class Program
+    options.AddPolicy("permitirTudo", builder =>
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("permitirTudo", builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                });
-            });
-
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<VitrineDbContext>(options =>
-                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-             );
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 
-            var app = builder.Build();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-            app.RegistrarEndpointsLancamento();
-            app.UseCors("permitirTudo");
 
-            app.RegistrarEndpointsProduto();
-            app.RegistrarEndpointsCategoria();
+builder.Services.AddDbContext<VitrineDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            app.Run();
-        }
-    }
+
+
+
+
+
+
+builder.Services.AddControllers();
+
+
+var app = builder.Build();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseCors("permitirTudo");
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

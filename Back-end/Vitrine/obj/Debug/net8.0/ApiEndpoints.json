@@ -1,50 +1,52 @@
 [
   {
-    "ContainingType": "Categorias\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsCategoria\u003Eb__0_0",
-    "RelativePath": "categorias/",
-    "HttpMethod": "GET",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[Vitrine.Model.Categoria, Vitrine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Categorias\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsCategoria\u003Eb__0_2",
-    "RelativePath": "categorias/",
+    "ContainingType": "Vitrine.Controller.LoginAdminController",
+    "Method": "ValidarLoginAdmin",
+    "RelativePath": "admin/login",
     "HttpMethod": "POST",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "categoria",
-        "Type": "Vitrine.Model.Categoria",
+        "Name": "request",
+        "Type": "Vitrine.Model.Usuario",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Categorias\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsCategoria\u003Eb__0_1",
-    "RelativePath": "categorias/{id}",
+    "ContainingType": "Vitrine.Controllers.CarrosselController",
+    "Method": "GetCarrossel",
+    "RelativePath": "api/Carrossel",
     "HttpMethod": "GET",
-    "IsController": false,
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Vitrine.Controllers.CarrosselController",
+    "Method": "CriarCarrossel",
+    "RelativePath": "api/Carrossel",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carrossel",
+        "Type": "Vitrine.Model.Carrossel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Vitrine.Controllers.CarrosselController",
+    "Method": "GetCarrossel",
+    "RelativePath": "api/Carrossel/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
@@ -53,24 +55,76 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Categorias\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsCategoria\u003Eb__0_3",
-    "RelativePath": "categorias/{Id}",
-    "HttpMethod": "PUT",
-    "IsController": false,
+    "ContainingType": "Vitrine.Controllers.CarrosselController",
+    "Method": "DeleteCarrossel",
+    "RelativePath": "api/Carrossel/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Id",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Vitrine.Controllers.CategoriasController",
+    "Method": "GetCategorias",
+    "RelativePath": "api/Categorias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Vitrine.Controllers.CategoriasController",
+    "Method": "PostCategoria",
+    "RelativePath": "api/Categorias",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoria",
+        "Type": "Vitrine.Model.Categoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Vitrine.Controllers.CategoriasController",
+    "Method": "GetCategoria",
+    "RelativePath": "api/Categorias/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Vitrine.Controllers.CategoriasController",
+    "Method": "PutCategoria",
+    "RelativePath": "api/Categorias/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -80,42 +134,30 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Categorias\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsCategoria\u003Eb__0_4",
-    "RelativePath": "categorias/{Id}",
+    "ContainingType": "Vitrine.Controllers.CategoriasController",
+    "Method": "DeleteCategoria",
+    "RelativePath": "api/Categorias/{id}",
     "HttpMethod": "DELETE",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Id",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Vitrine.Endpoints.Lancamentos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsLancamento\u003Eb__0_1",
-    "RelativePath": "lancamentos/",
+    "ContainingType": "Vitrine.Controllers.LancamentosController",
+    "Method": "Create",
+    "RelativePath": "api/Lancamentos",
     "HttpMethod": "POST",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
@@ -124,20 +166,14 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Vitrine.Endpoints.Lancamentos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsLancamento\u003Eb__0_0",
-    "RelativePath": "lancamentos/produto/{produtoId}",
+    "ContainingType": "Vitrine.Controllers.LancamentosController",
+    "Method": "GetByProduto",
+    "RelativePath": "api/Lancamentos/produto/{produtoId}",
     "HttpMethod": "GET",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
@@ -146,20 +182,14 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Vitrine.Endpoints.Produtos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsProduto\u003Eb__0_0",
-    "RelativePath": "produtos/",
+    "ContainingType": "Vitrine.Controllers.ProdutosController",
+    "Method": "GetProdutos",
+    "RelativePath": "api/Produtos",
     "HttpMethod": "GET",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
@@ -186,46 +216,37 @@
         "Name": "ordenarPor",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "apenasDisponiveis",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "\u003C\u003Ef__AnonymousType3\u00605[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable\u00601[[\u003C\u003Ef__AnonymousType1\u006012[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String[], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String[], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[\u003C\u003Ef__AnonymousType2\u00602[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vitrine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vitrine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Vitrine.Endpoints.Produtos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsProduto\u003Eb__0_2",
-    "RelativePath": "produtos/",
+    "ContainingType": "Vitrine.Controllers.ProdutosController",
+    "Method": "CriarProduto",
+    "RelativePath": "api/Produtos",
     "HttpMethod": "POST",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "produto",
+        "Name": "produtoDto",
         "Type": "Vitrine.DTO.ProdutoDTO",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Vitrine.Endpoints.Produtos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsProduto\u003Eb__0_1",
-    "RelativePath": "produtos/{id}",
-    "HttpMethod": "GET",
-    "IsController": false,
+    "ContainingType": "Vitrine.Controllers.ProdutosController",
+    "Method": "DeleteProduto",
+    "RelativePath": "api/Produtos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
@@ -234,83 +255,27 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Vitrine.Endpoints.Produtos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsProduto\u003Eb__0_3",
-    "RelativePath": "produtos/{Id}",
+    "ContainingType": "Vitrine.Controllers.ProdutosController",
+    "Method": "AtualizarProduto",
+    "RelativePath": "api/Produtos/{id}",
     "HttpMethod": "PUT",
-    "IsController": false,
+    "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Id",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "produtoAtualizado",
-        "Type": "Vitrine.Model.Produto",
+        "Name": "produtoDto",
+        "Type": "Vitrine.DTO.ProdutoDTO",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Vitrine.Endpoints.Produtos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsProduto\u003Eb__0_4",
-    "RelativePath": "produtos/{Id}",
-    "HttpMethod": "DELETE",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Vitrine.Endpoints.Produtos\u002B\u003C\u003Ec",
-    "Method": "\u003CRegistrarEndpointsProduto\u003Eb__0_5",
-    "RelativePath": "produtosPorCategoria/{IdCategoria}",
-    "HttpMethod": "GET",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   }
 ]
