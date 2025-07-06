@@ -65,10 +65,6 @@ export const ProdutosProvider = ({ children }) => {
 
 
 
-
-
-
-
   return (
     <Api.Provider value={{ produtos, categoria, fetchProdutos, pagination }}>
       {children}

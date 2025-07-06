@@ -1,6 +1,4 @@
-// App.jsx
 import '../src/css/App.css';
-
 import Navbar from "./components/NavBar/Navbar";
 import Home from "./Home";
 import { ProdutosProvider } from './services/api';

@@ -6,14 +6,14 @@ const Carrossel = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // Buscar as imagens da API
+    
     const fetchImagens = async () => {
       try {
         const response = await fetch('https://localhost:7066/api/carrossel');
         if (!response.ok) throw new Error('Erro ao buscar imagens');
 
         const data = await response.json();
-        setImagens(data); // deve ser um array de objetos com o campo "imagem"
+        setImagens(data); 
       } catch (error) {
         console.error('Erro ao carregar carrossel:', error);
       }
