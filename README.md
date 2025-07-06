@@ -36,6 +36,14 @@ Funcionalidades:
 
 • Navegação entre rotas com React Router 
 
+• estoque nos produtos 
+
+• atualizacao de estoque 
+
+• produtos sem estoque nao pode ser visto 
+
+• tela login com senha 
+( dmin e 1234 )
  # Back-End 
 
 
