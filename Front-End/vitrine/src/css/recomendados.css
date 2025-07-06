@@ -43,8 +43,8 @@
 }
 
 @media (max-width: 768px) {
-   .recomendados {
+  .recomendados {
     display: none;
   }
-  
+
 }

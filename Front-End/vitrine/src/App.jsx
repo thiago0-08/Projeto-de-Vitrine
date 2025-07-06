@@ -10,7 +10,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Cards from "./pages/cards";
 import Lancamentos from "./pages/Lancamentos";
 import Login from "./Login";
-import ProtectedRoute from './components/ProtectedRoute'; // novo componente para autenticação
+
+
 
 const App = () => {
   return (
@@ -25,11 +26,7 @@ const App = () => {
               <Route path="/services" element={<h1>Services Page</h1>} />
               <Route path="/produto" element={<Produto />} />
               <Route path="/cards" element={<Cards />} />
-              <Route path="/lancamentos" element={
-                <ProtectedRoute>
-                  <Lancamentos />
-                </ProtectedRoute>
-              } />
+              <Route path="/lancamentos" element={<Lancamentos />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </main>

@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
 
   const token = JSON.parse(authData).token;
 
-  
+
   if (!token) {
     return <Navigate to="/login" replace />;
   }

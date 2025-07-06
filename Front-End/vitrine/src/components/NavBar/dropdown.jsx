@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './dropdown.css'; 
+import './dropdown.css';
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 
@@ -12,7 +12,7 @@ const Dropdown = ({ options, onSelect, placeholder = "Buscar por ..." }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-     if (onSelect) onSelect(option);
+    if (onSelect) onSelect(option);
     setIsOpen(false);
   };
 

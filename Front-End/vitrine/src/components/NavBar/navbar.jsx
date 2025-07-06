@@ -107,11 +107,11 @@ export const Navbar = () => {
             </Dropdown>
           </li>
 
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink to="/Lancamentos" className="nav-link" onClick={() => setMenuOpen(false)}>
               Home
             </NavLink>
-          </li>
+          </li> */}
 
           <li className="nav-item">
             <NavLink to="/Login" className="nav-link" onClick={() => setMenuOpen(false)}>

@@ -2,7 +2,7 @@
   padding: 2rem;
   display: flex;
   justify-content: center;
-  background-color:#f9fafb;
+  background-color: #f9fafb;
   min-height: calc(100vh - 80px);
 }
 
@@ -95,7 +95,7 @@
   color: #6b7280;
 }
 
-.produto-quantidade{
+.produto-quantidade {
   font-size: 1.5rem;
   color: #858588;
   margin: 0;
@@ -104,12 +104,12 @@
 }
 
 .tamanho-selecionado {
-  font-size: 1,5rem;
+  font-size: 1, 5rem;
   color: #2a2a2b;
   margin: 0;
   padding: 2px;
   margin-top: 8px;
-  
+
   font-weight: 500;
 }
 
@@ -118,7 +118,7 @@
   background-color: #e0e7ff;
   color: #1e3a8a;
   padding: 6px 12px;
-  border: none; 
+  border: none;
   border-radius: 6px;
   font-weight: 600;
   font-size: 0.95rem;

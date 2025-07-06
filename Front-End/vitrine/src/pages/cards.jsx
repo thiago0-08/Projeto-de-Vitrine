@@ -1,13 +1,13 @@
 import '../css/cards.css';
-import { useNavigate, useLocation } from 'react-router-dom'; 
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { Api } from '../services/api';
 
 const Cards = () => {
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
   const { produtos, pagination, fetchProdutos } = useContext(Api);
-  const [ordenarPor, setOrdenarPor ] = useState('nome');
+  const [ordenarPor, setOrdenarPor] = useState('nome');
   const [apenasDisponiveis, setApenasDisponiveis] = useState(false);
   const cardsData = produtos || [];
   const { currentPage, totalPages } = pagination;
@@ -17,10 +17,10 @@ const Cards = () => {
 
 
   useEffect(() => {
-  // console.log("CategoriaId capturado:", categoriaId);
-  fetchProdutos(1, 12, '', categoriaId);
-  window.scrollTo(0, 0);
-}, [location.search, ordenarPor, apenasDisponiveis]);
+    // console.log("CategoriaId capturado:", categoriaId);
+    fetchProdutos(1, 12, '', categoriaId, ordenarPor, apenasDisponiveis);
+    window.scrollTo(0, 0);
+  }, [location.search, ordenarPor, apenasDisponiveis]);
 
 
   if (!produtos) {
@@ -52,7 +52,7 @@ const Cards = () => {
           <option value="-nome">Ordem Decrecente </option>
           <option value="preco">Preço Crescente</option>
           <option value="-preco">Preço Decrecente</option>
-          </select>
+        </select>
       </div>
 
       <div className="cards-container">

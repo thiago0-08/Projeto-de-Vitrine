@@ -1,10 +1,10 @@
 import './css/login.css';
-import CryptoJS from 'crypto-js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const endPoints = {
-  postLogin: "http://localhost:3000/seu-endpoint-de-login", // substitua pelo seu endpoint real
+  postLogin: "https://localhost:7066/admin/login",
 };
 
 const Login = () => {
@@ -12,43 +12,29 @@ const Login = () => {
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  const hashPassword = (senha) => {
-    return CryptoJS.MD5(senha).toString();
-  };
-
-  const hashBasic64 = (data) => {
-    return btoa(data);
-  };
-
-  const cadastroUsuario = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    const hashedPassword = hashPassword(senha);
-    const basicAuth = 'basic ' + hashBasic64(`${email}:${hashedPassword}`);
 
     try {
       const response = await fetch(endPoints.postLogin, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': basicAuth
         },
-        body: JSON.stringify({ username: email, password: hashedPassword })
+        body: JSON.stringify({ email, senha }),
       });
 
       const data = await response.json();
 
-      if (data.status) {
-        localStorage.setItem('dados', JSON.stringify(data.dados));
-        navigate('/'); // redireciona para home
+      if (response.ok) {
+        console.log(data.token);
+        navigate("/lancamentos");
       } else {
-        alert('Login falhou');
-        navigate('/login');
-        console.error('Login falhou:', data.message);
+        alert("Login inválido: " + data.mensagem);
       }
-
     } catch (error) {
-      console.error('Erro:', error);
+      console.error('Erro ao fazer login:', error);
+      alert("Erro na requisição");
     }
   };
 
@@ -56,12 +42,12 @@ const Login = () => {
     <div className="login-container">
       <div className="login-form">
         <h1>Login</h1>
-        <form onSubmit={cadastroUsuario}>
+        <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Nome</label>
             <input
               type="text" id="email" name="email"
-              value={email} onChange={e => setEmail(e.target.value)} required/>
+              value={email} onChange={e => setEmail(e.target.value)} required />
           </div>
           <div className="form-group">
             <label htmlFor="senha">Senha</label>

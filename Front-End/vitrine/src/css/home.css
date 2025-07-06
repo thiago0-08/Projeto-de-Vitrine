@@ -25,12 +25,12 @@
   background: #fff;
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .recomendados-lista {
-  display: flex;          
-  gap: 12px;              
-  overflow-x: auto;       
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
   padding: 8px 0;
 }
