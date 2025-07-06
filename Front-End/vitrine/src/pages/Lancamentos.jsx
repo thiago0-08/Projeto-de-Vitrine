@@ -65,7 +65,7 @@ const Lancamentos = () => {
         setEstoqueAtual(produtoAtualizado.estoqueAtual);
       }
 
-      // 🔄 Atualiza a tabela
+      //  Atualiza a tabela
       setAtualizarTabela(prev => !prev);
     } catch (error) {
       setMensagem(` Erro: ${error.message}`);
