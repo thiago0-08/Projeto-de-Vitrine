@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Vitrine.DTO
 {
@@ -6,16 +7,21 @@ namespace Vitrine.DTO
     {
         [Required]
         public string Nome { get; set; }
+
         [Required]
         public string Descricao { get; set; }
+
         [Required]
         public double Preco { get; set; }
-        [Required]
 
-        public String[] Tamanhos { get; set; }
-        public string[] Cores { get; set; }
+        [Required]
+        public List<string> Tamanhos { get; set; } = new();
+
+        public List<string> Cores { get; set; } = new();
+
         [Required]
         public string Imagem { get; set; }
+
         [Required]
         public int IdCategoria { get; set; }
     }

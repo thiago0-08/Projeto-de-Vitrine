@@ -3,8 +3,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Vitrine.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddScoped<ProdutoService>();
+builder.Services.AddScoped<CategoriaService>();
+builder.Services.AddScoped<CarrosselService>();
+builder.Services.AddScoped<LancamentoService>();
+
 
 
 builder.Services.AddCors(options =>

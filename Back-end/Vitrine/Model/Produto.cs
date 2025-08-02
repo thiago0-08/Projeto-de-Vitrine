@@ -19,8 +19,9 @@ namespace Vitrine.Model
         public string Descricao { get; set; }
         [Required]
         public double Preco { get; set; }
-        public string[] Tamanhos { get; set; }
-        public string[] Cores { get; set; }
+        public List<string> Tamanhos { get; set; } = new List<string>();
+        public List<string> Cores { get; set; } = new List<string>();
+
         [Required]
         public string Imagem { get; set; }
         [Required]

@@ -1,7 +1,6 @@
-﻿using Database;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vitrine.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vitrine.DTO;
+using Vitrine.Services;
 
 namespace Vitrine.Controllers
 {
@@ -9,73 +8,50 @@ namespace Vitrine.Controllers
     [Route("api/[controller]")]
     public class CategoriasController : ControllerBase
     {
-        private readonly VitrineDbContext _context;
+        private readonly CategoriaService _service;
 
-        public CategoriasController(VitrineDbContext context)
+        public CategoriasController(CategoriaService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategorias()
+        public async Task<IActionResult> GetAll()
         {
-            var categorias = await _context.Categorias.ToListAsync();
+            var categorias = await _service.ObterCategoriasAsync();
             return Ok(categorias);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategoria(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
-
-            if (categoria == null)
-                return NotFound();
-
+            var categoria = await _service.ObterPorIdAsync(id);
+            if (categoria == null) return NotFound();
             return Ok(categoria);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCategoria([FromBody] Categoria categoria)
+        public async Task<IActionResult> Create([FromBody] CategoriaDTO dto)
         {
-            var nomeJaExistente = await _context.Categorias.AnyAsync(c => c.Nome == categoria.Nome);
-            if (nomeJaExistente)
-                return Conflict("Já existe uma categoria com esse nome.");
+            var (sucesso, erro, nova) = await _service.CriarAsync(dto);
+            if (!sucesso) return Conflict(erro);
 
-            _context.Categorias.Add(categoria);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCategoria), new { id = categoria.Id }, categoria);
+            return CreatedAtAction(nameof(GetById), new { id = nova!.Id }, nova);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoria(int id, [FromBody] Categoria categoriaAtualizada)
+        public async Task<IActionResult> Update(int id, [FromBody] CategoriaDTO dto)
         {
-            var categoriaExistente = await _context.Categorias.FindAsync(id);
-
-            if (categoriaExistente == null)
-                return NotFound();
-
-            categoriaExistente.Nome = categoriaAtualizada.Nome;
-            categoriaExistente.Descricao = categoriaAtualizada.Descricao;
-            categoriaExistente.Imagem_categoria = categoriaAtualizada.Imagem_categoria;
-
-            await _context.SaveChangesAsync();
-
+            var (sucesso, erro) = await _service.AtualizarAsync(id, dto);
+            if (!sucesso) return NotFound(erro);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoria(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
-
-            if (categoria == null)
-                return NotFound();
-
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            var deletado = await _service.DeletarAsync(id);
+            return deletado ? NoContent() : NotFound();
         }
     }
 }

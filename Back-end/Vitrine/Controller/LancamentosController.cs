@@ -1,7 +1,6 @@
-﻿using Database;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vitrine.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vitrine.DTO;
+using Vitrine.Services;
 
 namespace Vitrine.Controllers
 {
@@ -9,59 +8,33 @@ namespace Vitrine.Controllers
     [Route("api/[controller]")]
     public class LancamentosController : ControllerBase
     {
-        private readonly VitrineDbContext _context;
+        private readonly LancamentoService _service;
 
-        public LancamentosController(VitrineDbContext context)
+        public LancamentosController(LancamentoService service)
         {
-            _context = context;
+            _service = service;
         }
 
-        [HttpGet("produto/{produtoId}")]
-        public async Task<IActionResult> GetByProduto(int produtoId)
+        [HttpGet]
+        public async Task<IActionResult> GetLancamentos([FromQuery] int produtoId)
         {
-            var lancamentos = await _context.Lancamentos
-                .Where(l => l.ProdutoId == produtoId)
-                .OrderBy(l => l.Data)
-                .ToListAsync();
+            var resultado = await _service.ObterLancamentosPorProdutoAsync(produtoId);
 
-            if (!lancamentos.Any())
+            if (resultado == null || resultado.Count == 0)
                 return NotFound("Nenhum lançamento encontrado para este produto.");
 
-            return Ok(lancamentos);
+            return Ok(resultado);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Lancamento lancamento)
+        public async Task<IActionResult> CriarLancamento([FromBody] LancamentoDTO dto)
         {
-            var produto = await _context.Produtos.FindAsync(lancamento.ProdutoId);
-            if (produto == null)
-                return NotFound("Produto não encontrado.");
+            var (sucesso, erro, lancamento) = await _service.RealizarLancamentoAsync(dto);
 
-            if (lancamento.Tipo != "entrada" && lancamento.Tipo != "saida")
-                return BadRequest("Tipo inválido. Use 'entrada' ou 'saida'.");
+            if (!sucesso)
+                return BadRequest(erro);
 
-            if (lancamento.Quantidade <= 0)
-                return BadRequest("Quantidade deve ser maior que zero.");
-
-            var entradas = await _context.Lancamentos
-                .Where(l => l.ProdutoId == lancamento.ProdutoId && l.Tipo == "entrada")
-                .SumAsync(l => (int?)l.Quantidade) ?? 0;
-
-            var saidas = await _context.Lancamentos
-                .Where(l => l.ProdutoId == lancamento.ProdutoId && l.Tipo == "saida")
-                .SumAsync(l => (int?)l.Quantidade) ?? 0;
-
-            int estoqueAtual = entradas - saidas;
-
-            if (lancamento.Tipo == "saida" && estoqueAtual - lancamento.Quantidade < 0)
-                return BadRequest("Estoque insuficiente para essa saída.");
-
-            lancamento.Data = DateTime.UtcNow.AddTicks(1);
-
-            _context.Lancamentos.Add(lancamento);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetByProduto), new { produtoId = lancamento.ProdutoId }, lancamento);
+            return CreatedAtAction(nameof(GetLancamentos), new { produtoId = lancamento.ProdutoId }, lancamento);
         }
     }
 }

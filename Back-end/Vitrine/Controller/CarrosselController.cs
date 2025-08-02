@@ -1,7 +1,6 @@
-﻿using Database;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vitrine.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vitrine.DTO;
+using Vitrine.Services;
 
 namespace Vitrine.Controllers
 {
@@ -9,56 +8,31 @@ namespace Vitrine.Controllers
     [Route("api/[controller]")]
     public class CarrosselController : ControllerBase
     {
-        private readonly VitrineDbContext _context;
+        private readonly CarrosselService _service;
 
-        public CarrosselController(VitrineDbContext context)
+        public CarrosselController(CarrosselService service)
         {
-            _context = context;
+            _service = service;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetCarrossel()
-        {
-            var carrosseis = await _context.Carrossel.ToListAsync();
-            return Ok(carrosseis);
-        }
+        public async Task<IActionResult> Get() =>
+            Ok(await _service.GetAllAsync());
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCarrossel(int id)
-        {
-            var carrossel = await _context.Carrossel.FindAsync(id);
-
-            if (carrossel == null)
-                return NotFound();
-
-            return Ok(carrossel);
-        }
-
-        
         [HttpPost]
-        public async Task<IActionResult> CriarCarrossel([FromBody] Carrossel carrossel)
+        public async Task<IActionResult> Post([FromBody] CarrosselDTO dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            _context.Carrossel.Add(carrossel);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCarrossel), new { id = carrossel.Id }, carrossel);
+            var (sucesso, erro, item) = await _service.CriarAsync(dto);
+            if (!sucesso) return BadRequest(erro);
+            return CreatedAtAction(nameof(Get), new { id = item!.Id }, item);
         }
 
-        
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCarrossel(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var carrossel = await _context.Carrossel.FindAsync(id);
-
-            if (carrossel == null)
-                return NotFound();
-
-            _context.Carrossel.Remove(carrossel);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            var sucesso = await _service.DeletarAsync(id);
+            return sucesso ? NoContent() : NotFound();
         }
     }
+
 }
