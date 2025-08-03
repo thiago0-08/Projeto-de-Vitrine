@@ -50,14 +50,14 @@ export const ProdutosProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      setProdutos(data.products);
+      setProdutos(data.items);
       setPagination({
         currentPage: data.page,
         totalPages: data.totalPages,
-        pageSize: data.pageSize
+        pageSize: data.page
       });
 
-      return data.products;
+      return data.items;
     } catch (error) {
       console.error('Erro ao buscar produtos:', error);
     }

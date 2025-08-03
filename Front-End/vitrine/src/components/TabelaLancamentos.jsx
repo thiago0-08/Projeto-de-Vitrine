@@ -5,7 +5,9 @@ import '../css/tabelaLancamentos.css';
 const TabelaLancamentos = ({ produtoId, atualizar }) => {
   const [lancamentos, setLancamentos] = useState([]);
   const [erro, setErro] = useState('');
-  const URL_API = `https://localhost:7066/api/lancamentos/produto/${produtoId}`;
+  const URL_API = `https://localhost:7066/api/lancamentos?produtoId=${produtoId}`;
+  
+
 
   useEffect(() => {
     const fetchLancamentos = async () => {
@@ -28,6 +30,10 @@ const TabelaLancamentos = ({ produtoId, atualizar }) => {
       fetchLancamentos();
     }
   }, [produtoId, atualizar]);
+
+
+  
+
 
   return (
     <div className="tabela-lancamentos">
