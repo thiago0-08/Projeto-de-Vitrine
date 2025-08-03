@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using Vitrine.DTO;
 using Vitrine.Services;
@@ -17,11 +18,18 @@ namespace Vitrine.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProdutos(string? nome, int? categoriaId, bool apenasDisponiveis = false)
+        public async Task<IActionResult> GetProdutos(
+        int page = 1,
+        int pageSize = 12,
+        string? nome = null,
+        int? categoriaId = null,
+        string ordenarPor = "nome",
+        bool apenasDisponiveis = false)
         {
-            var produtos = await _service.GetProdutosAsync(nome, categoriaId, apenasDisponiveis);
-            return Ok(produtos);
+            var resultado = await _service.GetProdutosAsync(page, pageSize, nome, categoriaId, ordenarPor, apenasDisponiveis);
+            return Ok(resultado);
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduto(int id)

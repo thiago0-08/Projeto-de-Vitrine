@@ -5,6 +5,8 @@ namespace Vitrine.DTO
 {
     public class ProdutoDTO
     {
+        public int Id { get; set; }
+
         [Required]
         public string Nome { get; set; }
 
@@ -24,5 +26,6 @@ namespace Vitrine.DTO
 
         [Required]
         public int IdCategoria { get; set; }
+        public string? NomeCategoria { get; set; }
     }
 }

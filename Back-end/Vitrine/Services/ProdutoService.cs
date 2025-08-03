@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Vitrine.DTO;
+using Vitrine.Utils;
 using Vitrine.Model;
 using Database;
 
@@ -17,11 +18,19 @@ namespace Vitrine.Services
             _context = context;
         }
 
-        public async Task<List<Produto>> GetProdutosAsync(string nome = null, int? categoriaId = null, bool apenasDisponiveis = false)
+        public async Task<PaginationResponse<ProdutoDTO>> GetProdutosAsync(
+            int page = 1,
+            int pageSize = 10,
+            string? nome = null,
+            int? categoriaId = null,
+            string ordenarPor = "nome",
+            bool apenasDisponiveis = false)
         {
-            IQueryable<Produto> query = _context.Produtos.Include(p => p.Categoria);
+            IQueryable<Produto> query = _context.Produtos
+                .Include(p => p.Categoria)
+                .AsQueryable();
 
-            if (!string.IsNullOrEmpty(nome))
+            if (!string.IsNullOrWhiteSpace(nome))
             {
                 query = query.Where(p => EF.Functions.ILike(p.Nome, $"%{nome}%"));
             }
@@ -47,15 +56,54 @@ namespace Vitrine.Services
                 query = query.Where(p => produtosComEstoque.Contains(p.Id));
             }
 
-            return await query.ToListAsync();
+            // Ordenação
+            query = ordenarPor switch
+            {
+                "nome" => query.OrderBy(p => p.Nome),
+                "-nome" => query.OrderByDescending(p => p.Nome),
+                "preco" => query.OrderBy(p => p.Preco),
+                "-preco" => query.OrderByDescending(p => p.Preco),
+                _ => query.OrderBy(p => p.Nome),
+            };
+
+            // Total de itens antes da paginação
+            int totalItems = await query.CountAsync();
+
+            // Aplicar paginação
+            var produtos = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Mapear para DTO
+            var produtosDTO = produtos.Select(p => new ProdutoDTO
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Descricao = p.Descricao,
+                Preco = p.Preco,
+                Tamanhos = p.Tamanhos,
+                Cores = p.Cores,
+                Imagem = p.Imagem,
+                IdCategoria = p.Categoria?.Id ?? 0,
+                NomeCategoria = p.Categoria?.Nome ?? string.Empty
+            }).ToList();
+
+            return new PaginationResponse<ProdutoDTO>
+            {
+                Items = produtosDTO,
+                TotalItems = totalItems,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
+            };
         }
 
-        public async Task<Produto> GetProdutoByIdAsync(int id)
+        public async Task<Produto?> GetProdutoByIdAsync(int id)
         {
             return await _context.Produtos.Include(p => p.Categoria).FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<(bool sucesso, string? erro, Produto produto)> CriarProdutoAsync(ProdutoDTO dto)
+        public async Task<(bool sucesso, string? erro, Produto? produto)> CriarProdutoAsync(ProdutoDTO dto)
         {
             var categoria = await _context.Categorias.FindAsync(dto.IdCategoria);
             if (categoria == null)

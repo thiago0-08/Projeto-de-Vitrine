@@ -6,8 +6,8 @@ namespace Vitrine.Model
 {
     public class Categoria
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {  get; set; }
        
         public string Nome { get; set; }
