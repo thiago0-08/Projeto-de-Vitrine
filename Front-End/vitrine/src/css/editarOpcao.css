@@ -1,0 +1,110 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.container h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.container h5 {
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 32px;
+}
+
+/* GRID MENU */
+.menu-Configuracao {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.menu-item h1 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.menu-item p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* OPÇÕES DE EDIÇÃO */
+.opcao {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.EditarEstoque,
+.NewProduto,
+.NewCategoria {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #f9fafb;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s ease;
+}
+
+.EditarEstoque:hover,
+.NewProduto:hover,
+.NewCategoria:hover {
+    background-color: #f3f4f6;
+}
+
+.Icone {
+    font-size: 2rem;
+    color: #3b82f6;
+}
+
+.texto h1 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.texto .subtitulo {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.Button {
+    margin-left: auto;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.Button:hover {
+    background-color: #2563eb;
+}
