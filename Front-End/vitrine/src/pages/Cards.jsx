@@ -43,7 +43,7 @@ const Cards = () => {
     <>
       <div className='Filtro-produtos'>
         <label>
-          <input type="checkbox" checked={apenasDisponiveis} onChange={(e) => setApenasDisponiveis(e.target.checked)} />
+          <input type="checkbox" aria-label="Mostrar apenas produtos disponíveis" checked={apenasDisponiveis} onChange={(e) => setApenasDisponiveis(e.target.checked)} />
           Mostrar apenas produtos disponíveis
         </label>
 
@@ -56,9 +56,21 @@ const Cards = () => {
       </div>
 
       <div className="cards-container">
-        {cardsData.map((produto, index) => (
-          <div key={index} className={`card ${produto.indisponivel ? 'indisponivel' : ''}`}>
-            <img src={produto.imagem} alt={produto.nome} className="card-image" />
+        {cardsData.map((produto) => (
+          <div
+            key={produto.id}
+            className={`card ${produto.indisponivel ? 'indisponivel' : ''}`}
+          >
+            {produto.indisponivel && (
+              <span className="card-indisponivel">Indisponível</span>
+            )}
+
+            <img
+              src={produto.imagem || '/placeholder.png'}
+              alt={produto.nome}
+              className="card-image"
+              onError={(e) => { e.target.src = '/placeholder.png'; }}
+            />
             <h3 className="card-title">{produto.nome}</h3>
             <p className="card-description">{produto.descricao}</p>
             <span className="card-preco">R$ {produto.preco}</span>
@@ -68,6 +80,7 @@ const Cards = () => {
           </div>
         ))}
       </div>
+
 
       <div className="pagination-info">
         <p>Página {currentPage} de {totalPages}</p>

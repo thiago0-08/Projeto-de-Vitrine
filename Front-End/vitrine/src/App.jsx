@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Cards from "./pages/cards";
 import Lancamentos from "./pages/Lancamentos";
 import Login from "./Login";
+import EditarOpcao from "./components/EditarOpcao";
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
               <Route path="/produto" element={<Produto />} />
               <Route path="/cards" element={<Cards />} />
               <Route path="/lancamentos" element={<Lancamentos />} />
+              <Route path="/editarOpcao" element={<EditarOpcao />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </main>

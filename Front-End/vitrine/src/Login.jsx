@@ -28,7 +28,8 @@ const Login = () => {
 
       if (response.ok) {
         console.log(data.token);
-        navigate("/lancamentos");
+        navigate("/editarOpcao");
+        // navigate("/lancamentos");
       } else {
         alert("Login inválido: " + data.mensagem);
       }
