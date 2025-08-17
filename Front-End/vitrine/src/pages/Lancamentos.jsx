@@ -73,60 +73,67 @@ const Lancamentos = () => {
   };
 
   return (
-    <div className="lancamentos-container">
-      <h2>Atualizar Estoque</h2>
-      <form onSubmit={handleSubmit} className="lancamentos-form">
-        <label>
-          Produto:
-          <select value={produtoId} onChange={(e) => setProdutoId(e.target.value)} required>
-            <option value="">Selecione um produto</option>
-            {produtos?.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.nome}
-              </option>
-            ))}
-          </select>
-        </label>
 
-        {estoqueAtual !== null && (
-          <p className="estoque-info">
-            Estoque atual: <strong>{estoqueAtual}</strong>
-          </p>
-        )}
+    
+  <div className="lancamentos-layout">
+  {/* Formulário */}
+  <div className="lancamentos-container">
+    <h2>Atualizar Estoque</h2>
+    <form onSubmit={handleSubmit} className="lancamentos-form">
+      <select
+        value={produtoId}
+        onChange={(e) => setProdutoId(e.target.value)}
+        required
+      >
+        <option value="">Selecione um produto</option>
+        {produtos?.map((p) => (
+          <option key={p.id} value={p.id}>
+            {p.nome}
+          </option>
+        ))}
+      </select>
 
-        <label>
-          Quantidade:
-          <input
-            type="number"
-            min="1"
-            value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
-            required
-          />
-        </label>
+      <input
+        type="number"
+        min="1"
+        value={quantidade}
+        onChange={(e) => setQuantidade(e.target.value)}
+        placeholder="Quantidade"
+        required
+      />
 
-        <label>
-          Tipo:
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            required
-            disabled={estoqueAtual === 0 && tipo === 'saida'}
-          >
-            <option value="entrada">Entrada</option>
-            <option value="saida" disabled={estoqueAtual === 0}>Saída</option>
-          </select>
-        </label>
+      <select
+        value={tipo}
+        onChange={(e) => setTipo(e.target.value)}
+        required
+        disabled={estoqueAtual === 0 && tipo === 'saida'}
+      >
+        <option value="entrada">Entrada</option>
+        <option value="saida" disabled={estoqueAtual === 0}>
+          Saída
+        </option>
+      </select>
 
-        <button type="submit">Lançar</button>
-      </form>
+      
+      <button type="submit">Lançar</button>
+    </form>
 
-      {mensagem && <p className={`mensagem ${mensagem.includes('Erro') ? 'erro' : 'sucesso'}`}>{mensagem}</p>}
+   
+    {mensagem && (
+      <p className={`mensagem ${mensagem.includes('Erro') ? 'erro' : 'sucesso'}`}>
+        {mensagem}
+      </p>
+    )}
+  </div>
 
-      <div className="tabela-lancamentos-container">
-        {produtoId && <TabelaLancamentos produtoId={produtoId} atualizar={atualizarTabela} />}
-      </div>
-    </div>
+  {/* Tabela */}
+  <div className="tabela-lancamentos">
+    <h3>Produtos Movimentados</h3>
+    {produtoId && (
+      <TabelaLancamentos produtoId={produtoId} atualizar={atualizarTabela} />
+    )}
+  </div>
+</div>
   );
 };
 

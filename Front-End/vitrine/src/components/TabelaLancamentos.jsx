@@ -6,7 +6,7 @@ const TabelaLancamentos = ({ produtoId, atualizar }) => {
   const [lancamentos, setLancamentos] = useState([]);
   const [erro, setErro] = useState('');
   const URL_API = `https://localhost:7066/api/lancamentos?produtoId=${produtoId}`;
-  
+
 
 
   useEffect(() => {
@@ -32,13 +32,11 @@ const TabelaLancamentos = ({ produtoId, atualizar }) => {
   }, [produtoId, atualizar]);
 
 
-  
+
 
 
   return (
     <div className="tabela-lancamentos">
-      <h3>Lançamentos do Produto</h3>
-
       {erro && <p className="erro">{erro}</p>}
 
       {!erro && lancamentos.length === 0 && <p className="empty-message">Nenhum lançamento encontrado.</p>}
@@ -55,7 +53,7 @@ const TabelaLancamentos = ({ produtoId, atualizar }) => {
           <tbody>
             {lancamentos.map((lanc) => (
               <tr key={lanc.id}>
-                <td>{new Date(lanc.data).toLocaleString('pt-BR')}</td>
+                <td>{new Date(lanc.data).toLocaleDateString('pt-BR')}</td>
                 <td className={`type-cell ${lanc.tipo}`}>
                   {lanc.tipo === 'entrada' ? (
                     <>
@@ -69,11 +67,12 @@ const TabelaLancamentos = ({ produtoId, atualizar }) => {
                     </>
                   )}
                 </td>
-                <td>{lanc.quantidade}</td>
+                <td>{lanc.quantidade > 0 ? `+${lanc.quantidade}` : lanc.quantidade}</td>
               </tr>
             ))}
           </tbody>
         </table>
+
       )}
     </div>
   );

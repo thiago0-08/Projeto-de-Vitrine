@@ -1,49 +1,36 @@
 .tabela-lancamentos {
   background-color: #ffffff;
-  border-radius: 0.5rem;
-  padding: 2rem;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  max-width: 900px;
+  max-width: 1000px;
   margin: 2rem auto;
   font-family: 'Inter', sans-serif;
   color: #1e1e1e;
+  overflow-y: auto;    
+  max-height: 400px;     
+  overflow-x: hidden;    
 }
 
 .tabela-lancamentos h3 {
-  text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
-}
-
-.tabela-lancamentos .erro {
-  color: #d93025;
-  background-color: #fbeaea;
-  padding: 0.75rem 1rem;
-  border-radius: 0.375rem;
-  text-align: center;
-  font-weight: 500;
   margin-bottom: 1rem;
-}
-
-.tabela-lancamentos .empty-message {
-  text-align: center;
-  color: #777;
-  font-style: italic;
-  font-size: 1rem;
-  margin-top: 1rem;
+  color: #111827;
 }
 
 .launch-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
   font-size: 0.95rem;
+  table-layout: fixed;   
 }
 
 .launch-table thead {
-  background-color: #f3f4f6;
+  background-color: #f9fafb;
+  position: sticky;  
+  top: 0;            
+  z-index: 2;        
 }
 
 .launch-table th {
@@ -55,6 +42,7 @@
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   border-bottom: 2px solid #e5e7eb;
+  background-color: #f9fafb; 
 }
 
 .launch-table tbody tr {
@@ -63,7 +51,7 @@
 }
 
 .launch-table tbody tr:hover {
-  background-color: #f9fafb;
+  background-color: #f3f4f6;
 }
 
 .launch-table td {
@@ -72,64 +60,15 @@
   color: #111827;
 }
 
-.type-cell {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-}
-
-.type-cell.entrada {
-  color: #10b981; 
-}
-
-.type-cell.saida {
-  color: #ef4444; 
-}
-
-.icon {
+.icon { 
   font-size: 1.2rem;
-}
+ 
+ } 
 
 .icon--in {
-  color: #10b981;
-}
+   color: #10b981;
+ }
 
-.icon--out {
+.icon--out { 
   color: #ef4444;
-}
-
-/* Responsivo */
-@media (max-width: 600px) {
-  .launch-table thead {
-    display: none;
-  }
-
-  .launch-table, .launch-table tbody, .launch-table tr, .launch-table td {
-    display: block;
-    width: 100%;
-  }
-
-  .launch-table tr {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  .launch-table td {
-    padding-left: 50%;
-    position: relative;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .launch-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 1rem;
-    font-weight: 600;
-    color: #6b7280;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.03em;
-  }
-}
+ }

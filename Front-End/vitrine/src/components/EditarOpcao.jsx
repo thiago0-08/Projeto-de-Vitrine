@@ -2,8 +2,11 @@ import "../css/editarOpcao.css";
 import { FaBoxOpen } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import { RiMenuAddFill } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
 
 const EditarOpcao = () => {
+    const navigate = useNavigate();
+    
     return (
         <div className="container">
             <h1>Configurações</h1>
@@ -44,7 +47,9 @@ const EditarOpcao = () => {
                         <h1>Editar Estoque</h1>
                         <p className="subtitulo">Atualize rapidamente os níveis de estoque.</p>
                     </div>
-                    <button className="Button">Editar</button>
+                    
+                    <button className="Button"  onClick={() => navigate('/lancamentos')}>Editar</button>
+                   
                 </div>
 
                 <div className="NewProduto">
