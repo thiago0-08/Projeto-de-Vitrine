@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FiArrowDownCircle, FiArrowUpCircle } from 'react-icons/fi';
-import '../css/tabelaLancamentos.css';
+import '../../css/tabelaLancamentos.css';
 
 const TabelaLancamentos = ({ produtoId, atualizar }) => {
   const [lancamentos, setLancamentos] = useState([]);

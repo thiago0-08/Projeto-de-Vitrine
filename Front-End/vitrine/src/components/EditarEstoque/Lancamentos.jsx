@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { Api } from '../services/api';
-import '../css/lancamentos.css';
-import TabelaLancamentos from '../components/TabelaLancamentos';
+import { Api } from '../../services/api';
+import '../../css/lancamentos.css';
+import TabelaLancamentos from './TabelaLancamentos';
 
 const Lancamentos = () => {
   const { produtos, fetchProdutos } = useContext(Api);

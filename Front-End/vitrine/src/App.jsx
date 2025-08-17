@@ -6,9 +6,10 @@ import Rodape from "./components/Rodape";
 import Produto from './pages/Produto';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Cards from "./pages/cards";
-import Lancamentos from "./pages/Lancamentos";
+import Lancamentos from "./components/EditarEstoque/Lancamentos";
 import Login from "./Login";
-import EditarOpcao from "./components/EditarOpcao";
+import EditarOpcao from "./components/EditarEstoque/EditarOpcao";
+import NovoProduto from "./components/EditarEstoque/NovoProduto";
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="/cards" element={<Cards />} />
               <Route path="/lancamentos" element={<Lancamentos />} />
               <Route path="/editarOpcao" element={<EditarOpcao />} />
+              <Route path='/NovoProduto' element={<NovoProduto />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </main>

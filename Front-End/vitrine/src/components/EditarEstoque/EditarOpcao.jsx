@@ -1,4 +1,4 @@
-import "../css/editarOpcao.css";
+import "../../css/editarOpcao.css";
 import { FaBoxOpen } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import { RiMenuAddFill } from "react-icons/ri";
@@ -58,7 +58,7 @@ const EditarOpcao = () => {
                         <h1>Criar novo Produto</h1>
                         <p className="subtitulo">Adicione um novo produto à sua loja.</p>
                     </div>
-                    <button className="Button">Criar</button>
+                    <button className="Button" onClick={() => navigate('/NovoProduto')}>Criar</button>
                 </div>
 
                 <div className="NewCategoria">

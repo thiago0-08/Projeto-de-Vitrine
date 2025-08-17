@@ -63,11 +63,30 @@ export const ProdutosProvider = ({ children }) => {
     }
   };
 
-
+  const addProduto = async (NovoProduto) => {
+    try {
+      const response = await fetch(`${URL_API}/produtos`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(NovoProduto)
+      });
+      if (!response.ok) {
+        throw new Error('Erro ao adicionar produto');
+      }
+      const data = await response.json();
+      fetchProdutos();
+      return data;
+    } catch (error) {
+      console.error('Erro ao adicionar produto:', error);
+    }
+  };
 
   return (
-    <Api.Provider value={{ produtos, categoria, fetchProdutos, pagination }}>
+    <Api.Provider value={{ produtos, categoria, fetchProdutos, addProduto, pagination }}>
       {children}
     </Api.Provider>
+
   );
 };
