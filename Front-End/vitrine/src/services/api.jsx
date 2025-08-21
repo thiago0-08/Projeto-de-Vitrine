@@ -83,8 +83,28 @@ export const ProdutosProvider = ({ children }) => {
     }
   };
 
+  const addCategoria = async (novaCategoria) => {
+    try {
+      const response = await fetch(`${URL_API}/categorias`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(novaCategoria)
+      });
+      if (!response.ok) {
+        throw new Error('Erro ao adicionar categoria');
+      }
+      const data = await response.json();
+      setCategoria(prev => [...prev, data]);
+      return data;
+    } catch (error) {
+      console.error('Erro ao adicionar categoria:', error);
+    }
+  };
+
   return (
-    <Api.Provider value={{ produtos, categoria, fetchProdutos, addProduto, pagination }}>
+    <Api.Provider value={{ produtos, categoria, fetchProdutos, addProduto, addCategoria, pagination }}>
       {children}
     </Api.Provider>
 

@@ -10,6 +10,8 @@ import Lancamentos from "./components/EditarEstoque/Lancamentos";
 import Login from "./Login";
 import EditarOpcao from "./components/EditarEstoque/EditarOpcao";
 import NovoProduto from "./components/EditarEstoque/NovoProduto";
+import NovaCategoria from "./components/EditarEstoque/NovaCategoria";
+
 
 
 
@@ -29,7 +31,7 @@ const App = () => {
               <Route path="/lancamentos" element={<Lancamentos />} />
               <Route path="/editarOpcao" element={<EditarOpcao />} />
               <Route path='/NovoProduto' element={<NovoProduto />} />
-              <Route path="/login" element={<Login />} />
+              <Route path='/NovaCategoria' element={<NovaCategoria />} />
             </Routes>
           </main>
           <Rodape />

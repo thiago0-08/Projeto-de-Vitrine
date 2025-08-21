@@ -65,9 +65,9 @@ const EditarOpcao = () => {
                     <i className="Icone"><RiMenuAddFill /></i>
                     <div className="texto">
                         <h1>Gerenciar Categorias</h1>
-                        <p className="subtitulo">Organize suas categorias de produtos.</p>
+                        <p className="subtitulo">Crie ou Organize suas categorias de produtos.</p>
                     </div>
-                    <button className="Button">Gerenciar</button>
+                    <button className="Button"onClick={() => navigate('/NovaCategoria')} >Gerenciar</button>
                 </div>
             </div>
         </div>
